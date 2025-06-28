@@ -1,0 +1,35 @@
+.account-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px 30px;
+  background-color: #fefefe;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.account-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.account-details .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.account-details label {
+  font-weight: 600;
+  color: #555;
+  width: 40%;
+}
+
+.account-details span {
+  color: #222;
+  width: 60%;
+  text-align: right;
+}
