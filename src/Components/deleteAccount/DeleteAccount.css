@@ -1,0 +1,39 @@
+.delete-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 25px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fdfdfd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.delete-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-title {
+  color: #d9534f;
+  margin-bottom: 15px;
+}
+
+.delete-message {
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.delete-button {
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c9302c;
+}

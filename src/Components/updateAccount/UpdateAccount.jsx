@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UpdateAccount.css';
 import { useNavigate } from 'react-router-dom';
+import Header from '../Header';
+import Footer from '../Footer';
 
 export default function UpdateAccount() {
   const navigate = useNavigate();
@@ -41,6 +43,8 @@ export default function UpdateAccount() {
   };
 
   return (
+    <>
+    <Header/>
     <div className='update-container'>
       <h2>Update Account</h2>
       <input name="fname" value={formData.fname} onChange={handleChange} placeholder="First Name" />
@@ -50,5 +54,7 @@ export default function UpdateAccount() {
       <input name="password" value={formData.password} onChange={handleChange} placeholder="New Password (optional)" />
       <button onClick={handleUpdate}>Update</button>
     </div>
+    <Footer/>
+    </>
   )
 }
