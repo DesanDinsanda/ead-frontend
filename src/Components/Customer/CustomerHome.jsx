@@ -1,6 +1,9 @@
 import React from 'react'
 import Header from '../Header'
 import '../../Css/CustomerHome.css'
+import Footer from '../Footer'
+import { CirclePlus,FileChartColumnIncreasing,SendHorizontal } from 'lucide-react';
+
 
 function CustomerHome() {
   return (
@@ -30,10 +33,47 @@ function CustomerHome() {
             </div>
         </div>
 
-        <div>
+        <div className='quickActions'>
+            <h2>Quick Actions</h2>
+
+            <div className='allBoxes'>
+            <div className='actionBox'>
+                
+                <div className='customerIcon'>
+                    <CirclePlus  />
+                </div>
+                <div>
+                    <h5>Create new service request</h5>
+                <p>get help with your home tasks</p>
+                </div>
+                
+            </div>
+            <div className='actionBox'>
+                <div className='customerIcon'>
+                    <FileChartColumnIncreasing />
+                </div>
+                <div>
+                    <h5>View all service requests</h5>
+                    <p>Manage youe existing request</p>
+                </div>
+                
+            </div>
+            <div className='actionBox'>
+                <div className='customerIcon'>
+                    <SendHorizontal />
+                </div>
+                <div>
+                <h5>Submi a complain </h5>
+                <p>Report issues with service</p>
+                </div>
+                
+            </div>
+            </div>
 
         </div>
     </div>
+    <Footer/>
+    
     </>
   )
 }
