@@ -5,9 +5,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 
 function Header() {
+  const navigate = useNavigate();
   return (
     <>
     <Navbar expand="lg" className="bg-primary">
@@ -20,8 +22,8 @@ function Header() {
             <Nav.Link href="#link" className='text-white'>My Request</Nav.Link>
             <Nav.Link href="#link" className='text-white'>Complain</Nav.Link>
           </Nav>
-          <Button className='bg-white text-dark me-3'>Sign in</Button>
-          <Button className='bg-white text-dark'>Register</Button>
+          <Button onClick={() => navigate('/login')} className='bg-white text-dark me-3'>Sign in</Button>
+          <Button onClick={() => navigate('/signup')}className='bg-white text-dark'>Register</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
