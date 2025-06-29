@@ -9,6 +9,7 @@ import Login from './Components/login/Login'
 import ViewAccount from './Components/viewAccount/ViewAccount'
 import UpdateAccount from './Components/updateAccount/UpdateAccount'
 import DeleteAccount from './Components/deleteAccount/DeleteAccount'
+import Footer from './Components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <Body/>
+      
 
 
     </>
