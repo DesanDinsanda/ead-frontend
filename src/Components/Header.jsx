@@ -14,12 +14,12 @@ function Header() {
     <>
     <Navbar expand="lg" className="bg-primary">
       <Container>
-        <Navbar.Brand href="#home" className="fw-bold">ServiceConnect</Navbar.Brand>
+        <Navbar.Brand  className="fw-bold" onClick={() => navigate('/home')}>ServiceConnect</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home" className='text-white'>Dashboard</Nav.Link>
-            <Nav.Link href="#link" className='text-white'>My Request</Nav.Link>
+            <Nav.Link className='text-white' onClick={() => navigate('/dashboard')}>Dashboard</Nav.Link>
+            <Nav.Link  className='text-white' onClick={() => navigate('/customerRequest')}>My Request</Nav.Link>
             <Nav.Link href="#link" className='text-white'>Complain</Nav.Link>
           </Nav>
           <Button onClick={() => navigate('/login')} className='bg-white text-dark me-3'>Sign in</Button>

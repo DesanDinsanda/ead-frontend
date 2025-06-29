@@ -12,6 +12,7 @@ import DeleteAccount from './Components/deleteAccount/DeleteAccount'
 import Footer from './Components/Footer'
 import CustomerHome from './Components/Customer/CustomerHome'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CustomerRequest from './Components/Customer/CustomerRequest'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,9 +24,12 @@ function App() {
       <Router>
       <Routes>
         <Route path="/" element={<Body />} />
+        <Route path="/home" element={<Body/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/customer-home" element={<CustomerHome />} />
+        <Route path="/dashboard" element={<CustomerHome/>} />
+        <Route path="/customerRequest" element={<CustomerRequest/>} />
         
       </Routes>
     </Router>

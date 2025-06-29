@@ -40,17 +40,17 @@ function CustomerHome() {
             <div className='actionBox'>
                 
                 <div className='customerIcon'>
-                    <CirclePlus  />
+                    <CirclePlus  size={30}/>
                 </div>
                 <div>
                     <h5>Create new service request</h5>
-                <p>get help with your home tasks</p>
+                    <p>get help with your home tasks</p>
                 </div>
                 
             </div>
             <div className='actionBox'>
                 <div className='customerIcon'>
-                    <FileChartColumnIncreasing />
+                    <FileChartColumnIncreasing size={30}/>
                 </div>
                 <div>
                     <h5>View all service requests</h5>
@@ -60,10 +60,10 @@ function CustomerHome() {
             </div>
             <div className='actionBox'>
                 <div className='customerIcon'>
-                    <SendHorizontal />
+                    <SendHorizontal size={30}/>
                 </div>
                 <div>
-                <h5>Submi a complain </h5>
+                <h5>Submit a complain </h5>
                 <p>Report issues with service</p>
                 </div>
                 
