@@ -102,6 +102,7 @@ p {
 .cardGrid{
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 
 }
@@ -116,7 +117,7 @@ p {
   box-shadow: 1px 1px 3px black;
   padding: 1em 1em;
   margin: 1em 1em;
-  width: 470px;
+  width: 420px;
 }
 .serviceImg{
     width: 100%;
