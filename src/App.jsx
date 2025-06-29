@@ -30,6 +30,9 @@ function App() {
         <Route path="/customer-home" element={<CustomerHome />} />
         <Route path="/dashboard" element={<CustomerHome/>} />
         <Route path="/customerRequest" element={<CustomerRequest/>} />
+        <Route path="/profile" element={<ViewAccount />} />
+        <Route path="/update" element={<UpdateAccount />} />
+        <Route path="/delete" element={<DeleteAccount />} />
         
       </Routes>
     </Router>

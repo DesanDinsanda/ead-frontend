@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UpdateAccount.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function UpdateAccount() {
+  const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
     id: '',
@@ -14,8 +16,8 @@ export default function UpdateAccount() {
   });
 
   useEffect(() => {
-  const customerId = sessionStorage.getItem('customerId');
-  axios.get(`http://localhost:8086/rest-app/customers/${customerId}`)
+  const customerId = sessionStorage.getItem('userId');
+  axios.get(`http://localhost:8086/customer-ms/customers/${customerId}`)
     .then(response => {
       const customer = response.data;
       customer.password = ""; // Clear password so it's not shown
@@ -31,7 +33,7 @@ export default function UpdateAccount() {
 
   const handleUpdate = async () => {
     try {
-      const response = await axios.put('http://localhost:8086/rest-app/customers', formData);
+      const response = await axios.put('http://localhost:8086/customer-ms/customers', formData);
       alert("Updated successfully!");
     } catch (error) {
       alert("Update failed!");

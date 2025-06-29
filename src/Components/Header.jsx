@@ -10,20 +10,60 @@ import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();
+  const userType = sessionStorage.getItem('userType');
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate('/');
+  };
+
+
+
   return (
     <>
     <Navbar expand="lg" className="bg-primary">
       <Container>
-        <Navbar.Brand  className="fw-bold" onClick={() => navigate('/home')}>ServiceConnect</Navbar.Brand>
+        <Navbar.Brand href="#home" className="fw-bold">ServiceConnect</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className='text-white' onClick={() => navigate('/dashboard')}>Dashboard</Nav.Link>
-            <Nav.Link  className='text-white' onClick={() => navigate('/customerRequest')}>My Request</Nav.Link>
-            <Nav.Link href="#link" className='text-white'>Complain</Nav.Link>
+            { userType === 'customer' && (
+              <>
+              <Nav.Link href="#home" className='text-white'>Dashboard</Nav.Link>
+              <Nav.Link href="#link" className='text-white'>My Request</Nav.Link>
+              <Nav.Link href="#link" className='text-white'>Complain</Nav.Link>
+              </>
+            )
+            }
+
+            { userType === 'worker' && (
+              <>
+              <Nav.Link href="#home" className='text-white'>Dashboard</Nav.Link>
+              <Nav.Link href="#link" className='text-white'>Available Jobs</Nav.Link>
+              <Nav.Link href="#link" className='text-white'>My Jobs</Nav.Link>
+              </>
+            )
+            }
+            
           </Nav>
-          <Button onClick={() => navigate('/login')} className='bg-white text-dark me-3'>Sign in</Button>
-          <Button onClick={() => navigate('/signup')}className='bg-white text-dark'>Register</Button>
+
+          { !userType && (
+              <>
+              <Button onClick={() => navigate('/login')} className='bg-white text-dark me-3'>Sign in</Button>
+              <Button onClick={() => navigate('/signup')}className='bg-white text-dark'>Register</Button>
+              </>
+            )
+          }
+
+          { userType && (
+              <>
+              <Button onClick={() => navigate('/profile')} className='bg-white text-dark me-3'>Profile</Button>
+              <Button onClick={handleLogout} className='bg-white text-dark'>Logout</Button>
+              </>
+            )
+          }
+
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>
