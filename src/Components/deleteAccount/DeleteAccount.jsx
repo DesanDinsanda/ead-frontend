@@ -11,9 +11,16 @@ export default function DeleteAccount() {
   const handleDelete = async (e) => {
     e.preventDefault(); 
 
-    const customerId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
+    const userType = sessionStorage.getItem('userType');
+
+    // Choose correct endpoint based on user type
+    const endpoint = userType === 'worker'
+      ? `http://localhost:8087/worker-app/workers/${userId}`
+      : `http://localhost:8086/customer-ms/customers/${userId}`;
+
     try {
-      await axios.delete(`http://localhost:8086/customer-ms/customers/${customerId}`);
+      await axios.delete(endpoint);
       alert("Account deleted successfully!");
       sessionStorage.clear();
       navigate('/'); 
@@ -31,7 +38,6 @@ export default function DeleteAccount() {
           <h2 className='delete-title'>Confirm Delete</h2>
           <span className='delete-message'>Are you sure you want to delete this account?</span>
           
-
           <button type="button" className='delete-button' onClick={handleDelete}>
             Delete My Account
           </button>

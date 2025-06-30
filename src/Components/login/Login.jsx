@@ -28,7 +28,7 @@ export default function Login() {
     try {
       const endpoint = formData.userType === 'customer'
         ? 'http://localhost:8086/customer-ms/customers/login'
-        : 'http://localhost:8086/worker-ms/workers/login';
+        : 'http://localhost:8087/worker-app/workers/login';
 
       const response = await axios.post(endpoint, formData);
       sessionStorage.setItem('userId', response.data.id);
@@ -36,6 +36,9 @@ export default function Login() {
       setMessage('Login successful!');
       if (formData.userType === 'customer') {
         navigate('/customer-home'); 
+      }
+      if (formData.userType === 'worker') {
+        navigate('/worker-home'); 
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {

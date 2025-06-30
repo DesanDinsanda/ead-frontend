@@ -14,10 +14,11 @@ const navigate = useNavigate();
     fname: '',
     lname: '',
     contact: '',
+    location: '',          // only used if worker
     username: '',
     password: '',
-    userType: 'customer', // default
-    location: ''          // only used if worker
+    userType: 'customer' // default
+    
   });
 
   const [message, setMessage] = useState('');
@@ -55,13 +56,16 @@ const navigate = useNavigate();
       const endpoint =
         formData.userType === 'customer'
           ? 'http://localhost:8086/customer-ms/customers/signup'
-          : 'http://localhost:8086/worker-ms/workers/signup';
+          : 'http://localhost:8087/worker-app/workers';
 
       const response = await axios.post(endpoint, formData);
       setMessage(response.data); // Backend message
 
       if (formData.userType === 'customer') {
-        navigate('/customer-home'); 
+        navigate('/'); 
+      }
+      if (formData.userType === 'worker') {
+        navigate('/'); 
       }
 
       // Clear form after submit
@@ -69,10 +73,11 @@ const navigate = useNavigate();
         fname: '',
         lname: '',
         contact: '',
+        location: '',
         username: '',
         password: '',
-        userType: 'customer',
-        location: ''
+        userType: 'customer'
+        
       });
     } catch (error) {
       setMessage('Signup failed!');
@@ -94,12 +99,13 @@ const navigate = useNavigate();
         <input type="text" name="fname" value={formData.fname} onChange={handleChange} placeholder="First Name" required /><br />
         <input type="text" name="lname" value={formData.lname} onChange={handleChange} placeholder="Last Name" required /><br />
         <input type="text" name="contact" value={formData.contact} onChange={handleChange} placeholder="Contact Number" required /><br />
-        <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required /><br />
-        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required /><br />
-
         {formData.userType === 'worker' && (
           <><input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Location" required /><br /> </>
         )}
+        <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required /><br />
+        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required /><br />
+
+        
 
         <button type="submit">Signup</button>
       </form>

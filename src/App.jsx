@@ -13,6 +13,7 @@ import Footer from './Components/Footer'
 import CustomerHome from './Components/Customer/CustomerHome'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CustomerRequest from './Components/Customer/CustomerRequest'
+import WorkerHome from './Components/worker/WorkerHome'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/customer-home" element={<CustomerHome />} />
+        <Route path="/worker-home" element={<WorkerHome />} />
         <Route path="/dashboard" element={<CustomerHome/>} />
         <Route path="/customerRequest" element={<CustomerRequest/>} />
         <Route path="/profile" element={<ViewAccount />} />
