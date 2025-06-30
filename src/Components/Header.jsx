@@ -23,15 +23,15 @@ function Header() {
     <>
     <Navbar expand="lg" className="bg-primary">
       <Container>
-        <Navbar.Brand href="#home" className="fw-bold">ServiceConnect</Navbar.Brand>
+        <Navbar.Brand  className="fw-bold" onClick={() => navigate('/ServiceConnect')}>ServiceConnect</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             { userType === 'customer' && (
               <>
-              <Nav.Link href="#home" className='text-white'>Dashboard</Nav.Link>
-              <Nav.Link href="#link" className='text-white'>My Request</Nav.Link>
-              <Nav.Link href="#link" className='text-white'>Complain</Nav.Link>
+              <Nav.Link className='text-white' onClick={() => navigate('/Dashboard')}>Dashboard</Nav.Link>
+              <Nav.Link className='text-white' onClick={() => navigate('/MyRequest')}>My Request</Nav.Link>
+              <Nav.Link href="#link" className='text-white' onClick={() => navigate('/Complain')}>Complain</Nav.Link>
               </>
             )
             }
