@@ -13,12 +13,11 @@ import Footer from './Components/Footer'
 import CustomerHome from './Components/Customer/CustomerHome'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CustomerRequest from './Components/Customer/CustomerRequest'
-<<<<<<< Updated upstream
 import WorkerHome from './Components/worker/WorkerHome'
-=======
 import EditRequest from './Components/Customer/EditRequest'
 import Complains from './Components/Customer/Complains'
->>>>>>> Stashed changes
+import WorkerSkills from './Components/worker/WorkerSkills'
+import EditSkills from './Components/worker/EditSkills'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -45,6 +44,8 @@ function App() {
         <Route path="/editCustomerRequest/:id" element={<EditRequest/>} />
         <Route path="/editCustomerRequest" element={<EditRequest/>} />
         <Route path="/Complain" element={<Complains/>} />
+        <Route path="/view-skills" element={<WorkerSkills />} />
+        <Route path="/edit-skill" element={<EditSkills />} />
         
       </Routes>
     </Router>
