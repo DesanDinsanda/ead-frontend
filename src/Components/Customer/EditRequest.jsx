@@ -11,9 +11,15 @@ function EditRequest() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
+      // id:'',
     title: '',
     description: '',
-    location: '',
+    addr_line_1: '',
+    addr_line_2: '',
+    addr_line_3: '',
+    // service_id: '',
+    // customer_id:'',
+    // request_status:''
 
   });
 
@@ -26,9 +32,15 @@ function EditRequest() {
       const data = response.data;
 
       setFormData({
-        title: data.title || '',
-        description: data.description || '',
-        location: data.addr_line_3 || '',
+        id:data.id,
+        title: data.title ,
+        description: data.description,
+        addr_line_1: data.addr_line_1,
+        addr_line_2: data.addr_line_2,
+        addr_line_3: data.addr_line_3,
+        service_id: data.service_id,
+        customer_id:data.customer_id,
+        request_status:data.request_status
         
       });
     } catch (error) {
@@ -44,20 +56,22 @@ function EditRequest() {
   const handleSave = async () => {
     try {
 
-        const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts/${id}`);
-      const data = response.data;
 
       await axios.put('http://localhost:8089/contract-service/customer/contracts', {
-        id : id,
+        id : formData.id,
         title: formData.title,
         description: formData.description,
-        addr_line_3: formData.location,
-        request_status: data.request_status
+        addr_line_1: formData.addr_line_1,
+        addr_line_2: formData.addr_line_2,
+        addr_line_3: formData.addr_line_3,
+        service_id: formData.service_id,
+        customer_id:formData.customer_id,
+        request_status: formData.request_status
         
         
       });
       alert("Successfully updated!");
-      navigate('/editCustomerRequest'); // navigate back if needed
+      navigate('/CustomerRequest'); // navigate back if needed
     } catch (error) {
       console.error("Update failed:", error);
       alert("Failed to update contract.");
@@ -94,11 +108,29 @@ function EditRequest() {
         </div>
 
         <div className="form-group">
-          <label><MapPin size={16} className="icon" /> Service Location</label>
+          <label><MapPin size={16} className="icon" /> Adress Line 1</label>
           <input
             type="text"
-            name="location"
-            value={formData.location}
+            name="addr_line_1"
+            value={formData.addr_line_1}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label><MapPin size={16} className="icon" /> Adress Line 2</label>
+          <input
+            type="text"
+            name="addr_line_2"
+            value={formData.addr_line_2}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label><MapPin size={16} className="icon" /> Adress Line 3</label>
+          <input
+            type="text"
+            name="addr_line_3"
+            value={formData.addr_line_3}
             onChange={handleChange}
           />
         </div>
