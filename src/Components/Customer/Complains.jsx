@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -114,3 +115,19 @@ function Complains() {
 }
 
 export default Complains;
+=======
+import React from 'react'
+import Header from '../Header'
+import Footer from '../Footer'
+
+function Complains() {
+  return (
+    <>
+    <Header/>
+    <Footer/>
+    </>
+  )
+}
+
+export default Complains
+>>>>>>> Stashed changes

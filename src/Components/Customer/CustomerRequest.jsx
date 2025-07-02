@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -16,6 +17,24 @@ function CustomerRequest() {
   // Modal control
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+=======
+import React, { useState,useEffect  } from 'react'
+import Header from '../Header'
+import Footer from '../Footer'
+import Button from 'react-bootstrap/Button';
+import '../../Css/customerRequest.css'
+import {FileChartColumnIncreasing } from 'lucide-react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
+
+function CustomerRequest() {
+  const [contracts,setContracts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
+
+>>>>>>> Stashed changes
 
   useEffect(() => {
     fetchContracts();
@@ -33,6 +52,7 @@ function CustomerRequest() {
     }
   };
 
+<<<<<<< Updated upstream
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
@@ -45,6 +65,8 @@ function CustomerRequest() {
     }
   };
 
+=======
+>>>>>>> Stashed changes
   return (
     <>
       <Header />
@@ -59,6 +81,7 @@ function CustomerRequest() {
           </div>
         </div>
 
+<<<<<<< Updated upstream
         {contracts.length === 0 ? (
           <div className='requestList'>
             <FileChartColumnIncreasing size={50} />
@@ -85,6 +108,35 @@ function CustomerRequest() {
           ))
         )}
       </div>
+=======
+      
+        {contracts.length === 0 ? (
+  <div className='requestList'>
+    <FileChartColumnIncreasing size={50}/>
+    <h5>No service requests</h5>
+    <p>Get started by creating a new service request.</p>
+    <Button variant="primary">New Request</Button>
+  </div>
+) : (
+  contracts.map((contract) => (
+    <div className='serviceList' key={contract.id}>
+      <div className='serviceDetails'>
+        <h4>{contract.title} ({contract.request_status})</h4>
+        <p>{contract.description}</p>
+        <p>Location : {contract.addr_line_3}</p>
+      </div>
+      <div className='changeButtons'>
+        <Button variant="primary" className='me-3' onClick={() => navigate(`/editCustomerRequest/${contract.id}`)}>Update</Button>
+        <Button variant="danger">Delete</Button>
+      </div>
+    </div>
+  ))
+)}
+
+    </div>
+
+    
+>>>>>>> Stashed changes
 
       {/* Delete Confirmation Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
