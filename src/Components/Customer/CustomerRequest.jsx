@@ -64,7 +64,7 @@ function CustomerRequest() {
             <FileChartColumnIncreasing size={50} />
             <h5>No service requests</h5>
             <p>Get started by creating a new service request.</p>
-            <Button variant="primary">New Request</Button>
+            <Button variant="primary" onClick={() => navigate('/createRequest')}>New Request</Button>
           </div>
         ) : (
           contracts.map((contract) => (

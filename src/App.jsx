@@ -20,6 +20,8 @@ import WorkerSkills from './Components/worker/WorkerSkills'
 import EditSkills from './Components/worker/EditSkills'
 import NewComplain from './Components/Customer/NewComplain'
 import CreateRequest from './Components/Customer/CreateRequest'
+import AvailableJobs from './Components/worker/AvailableJobs'
+import EditComplain from './Components/customer/EditComplain'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -50,6 +52,8 @@ function App() {
         <Route path="/edit-skill" element={<EditSkills />} />
          <Route path="/newComplain" element={<NewComplain/>} />
         <Route path="/createRequest" element={<CreateRequest/>} />
+        <Route path="/availableJobs" element={<AvailableJobs/>} />
+        <Route path="/editComplain" element={<EditComplain/>}/>
         
       </Routes>
     </Router>
