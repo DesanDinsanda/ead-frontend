@@ -11,6 +11,7 @@ function EditRequest() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
+<<<<<<< Updated upstream
       // id:'',
     title: '',
     description: '',
@@ -20,6 +21,11 @@ function EditRequest() {
     // service_id: '',
     // customer_id:'',
     // request_status:''
+=======
+    title: '',
+    description: '',
+    location: '',
+>>>>>>> Stashed changes
 
   });
 
@@ -32,6 +38,7 @@ function EditRequest() {
       const data = response.data;
 
       setFormData({
+<<<<<<< Updated upstream
         id:data.id,
         title: data.title ,
         description: data.description,
@@ -41,6 +48,11 @@ function EditRequest() {
         service_id: data.service_id,
         customer_id:data.customer_id,
         request_status:data.request_status
+=======
+        title: data.title || '',
+        description: data.description || '',
+        location: data.addr_line_3 || '',
+>>>>>>> Stashed changes
         
       });
     } catch (error) {
@@ -56,6 +68,7 @@ function EditRequest() {
   const handleSave = async () => {
     try {
 
+<<<<<<< Updated upstream
 
       await axios.put('http://localhost:8089/contract-service/customer/contracts', {
         id : formData.id,
@@ -67,11 +80,26 @@ function EditRequest() {
         service_id: formData.service_id,
         customer_id:formData.customer_id,
         request_status: formData.request_status
+=======
+        const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts/${id}`);
+      const data = response.data;
+
+      await axios.put('http://localhost:8089/contract-service/customer/contracts', {
+        id : id,
+        title: formData.title,
+        description: formData.description,
+        addr_line_3: formData.location,
+        request_status: data.request_status
+>>>>>>> Stashed changes
         
         
       });
       alert("Successfully updated!");
+<<<<<<< Updated upstream
       navigate('/CustomerRequest'); // navigate back if needed
+=======
+      navigate('/editCustomerRequest'); // navigate back if needed
+>>>>>>> Stashed changes
     } catch (error) {
       console.error("Update failed:", error);
       alert("Failed to update contract.");
@@ -108,6 +136,7 @@ function EditRequest() {
         </div>
 
         <div className="form-group">
+<<<<<<< Updated upstream
           <label><MapPin size={16} className="icon" /> Adress Line 1</label>
           <input
             type="text"
@@ -131,6 +160,13 @@ function EditRequest() {
             type="text"
             name="addr_line_3"
             value={formData.addr_line_3}
+=======
+          <label><MapPin size={16} className="icon" /> Service Location</label>
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+>>>>>>> Stashed changes
             onChange={handleChange}
           />
         </div>
