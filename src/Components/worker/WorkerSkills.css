@@ -1,9 +1,14 @@
+/* Container styling */
 .worker-skills-container {
+  max-width: 1000px;
+  margin: 40px auto;
   padding: 20px;
-  max-width: 900px;
-  margin: auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Heading */
 .worker-skills-container h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -11,40 +16,67 @@
   color: #333;
 }
 
-
+/* Table styling */
 .skills-table {
   width: 100%;
   border-collapse: collapse;
+  font-family: Arial, sans-serif;
 }
 
-.skills-table th, .skills-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
+/* Table header */
+.skills-table thead th {
+  background-color: rgb(249, 112, 0) !important; /* Orange */
+  color: white !important;
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-weight: bold;
 }
 
-.skills-table th {
-  background-color: #007bff;
-  color: white;
+/* Table body cells */
+.skills-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  color: #333;
+  text-align: left;
 }
 
+/* Zebra striping */
+.skills-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Hover effect */
+.skills-table tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+/* Edit and Delete Buttons */
 .edit-btn {
-  background-color: #ffc107;
+  background-color: #3498db;
   border: none;
-  padding: 5px 10px;
-  margin-right: 5px;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: #e74c3c;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 12px;
   color: white;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.edit-btn:hover,
+.edit-btn:hover {
+  background-color: #2980b9;
+}
+
 .delete-btn:hover {
-  opacity: 0.85;
+  background-color: #c0392b;
 }

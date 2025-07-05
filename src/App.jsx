@@ -26,10 +26,10 @@ import EditComplain from './Components/customer/EditComplain'
 import MyJobs from './Components/worker/MyJobs'
 import ViewAcceptedContracts from './Components/worker/ViewAcceptedContracts'
 import ViewRejectedContracts from './Components/worker/ViewRejectedContracts'
-
 import PendingCustomerRequests from './Components/Customer/PendingCustomerRequests'
 import AcceptedCustomerRequests from './Components/Customer/AcceptedCustomerRequests'
 import CancelledCustomerRequests from './Components/Customer/CancelledCustomerRequests'
+
 
 
 function App() {
@@ -64,13 +64,16 @@ function App() {
         <Route path="/availableJobs" element={<AvailableJobs/>} />
         <Route path="/editComplain/:id" element={<EditComplain/>}/>
 
+
         <Route path="/my-jobs" element={<MyJobs />} />
         <Route path="/accepted-contracts" element={<ViewAcceptedContracts />} />
         <Route path="/rejected-contracts" element={<ViewRejectedContracts />} />
-        
+
         <Route path="/PendingCustomerRequests" element={<PendingCustomerRequests/>}/>
         <Route path="/AcceptedCustomerRequests" element={<AcceptedCustomerRequests/>}/>
         <Route path="/CancelledCustomerRequests" element={<CancelledCustomerRequests/>}/>
+
+
 
 
         

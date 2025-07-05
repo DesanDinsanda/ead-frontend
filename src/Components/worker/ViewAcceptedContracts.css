@@ -24,9 +24,9 @@
 }
 
 /* Table header */
-.skills-table thead tr {
-  background-color: #2c3e50;
-  color: white;
+table.skills-table thead th {
+  background-color: rgb(249, 112, 0) !important;
+  color: white !important;
 }
 
 /* Table header cells */
