@@ -35,7 +35,7 @@ function CreateRequest() {
     addr_line_3: '',
     service_id: '',
     customer_id: customerId,
-    request_status: 'pending'
+    request_status: 'Pending'
 
   });
 

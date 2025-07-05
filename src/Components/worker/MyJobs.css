@@ -25,7 +25,7 @@
 
 /* Table header */
 table.skills-table thead th {
-  background-color: rgb(203, 60, 167) !important;
+  background-color: #008ECC!important;
   color: white !important;
 }
 
@@ -88,6 +88,7 @@ table.skills-table thead th {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 15px;
 }
 
 .center-btn1:hover {

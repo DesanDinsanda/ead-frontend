@@ -129,14 +129,14 @@ const getContractForCategory = async ()=>{
       worker_id: userId,
       job_status: accepted
     });
+    await fetchContracts(); 
     alert("Job Accepted");
-    navigate('/availableJobs');
-
   } catch (error) {
     console.error("Accept failed:", error);
     alert("Failed to accept contract.");
   }
-  };
+};
+
 
 
 
