@@ -40,7 +40,10 @@ function Header() {
               <>
               <Nav.Link href="#home" className='text-white'>Dashboard</Nav.Link>
               <Nav.Link  className='text-white' onClick={() => navigate('/availableJobs')}>Available Jobs</Nav.Link>
-              <Nav.Link onClick={() => navigate('/view-skills')} className='text-white'>My Jobs</Nav.Link>
+              <Nav.Link onClick={() => navigate('/view-skills')} className='text-white'>My Skills</Nav.Link>
+              <Nav.Link onClick={() => navigate('/my-jobs')} className='text-white'>My Jobs</Nav.Link>
+              
+              
               </>
             )
             }
