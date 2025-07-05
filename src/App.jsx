@@ -23,10 +23,16 @@ import CreateRequest from './Components/Customer/CreateRequest'
 import AvailableJobs from './Components/worker/AvailableJobs'
 import EditComplain from './Components/customer/EditComplain'
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import MyJobs from './Components/worker/MyJobs'
 import ViewAcceptedContracts from './Components/worker/ViewAcceptedContracts'
 import ViewRejectedContracts from './Components/worker/ViewRejectedContracts'
 
+=======
+import PendingCustomerRequests from './Components/Customer/PendingCustomerRequests'
+import AcceptedCustomerRequests from './Components/Customer/AcceptedCustomerRequests'
+import CancelledCustomerRequests from './Components/Customer/CancelledCustomerRequests'
+>>>>>>> Stashed changes
 =======
 import PendingCustomerRequests from './Components/Customer/PendingCustomerRequests'
 import AcceptedCustomerRequests from './Components/Customer/AcceptedCustomerRequests'
@@ -65,10 +71,16 @@ function App() {
         <Route path="/availableJobs" element={<AvailableJobs/>} />
         <Route path="/editComplain/:id" element={<EditComplain/>}/>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <Route path="/my-jobs" element={<MyJobs />} />
         <Route path="/accepted-contracts" element={<ViewAcceptedContracts />} />
         <Route path="/rejected-contracts" element={<ViewRejectedContracts />} />
         
+=======
+        <Route path="/PendingCustomerRequests" element={<PendingCustomerRequests/>}/>
+        <Route path="/AcceptedCustomerRequests" element={<AcceptedCustomerRequests/>}/>
+        <Route path="/CancelledCustomerRequests" element={<CancelledCustomerRequests/>}/>
+>>>>>>> Stashed changes
 =======
         <Route path="/PendingCustomerRequests" element={<PendingCustomerRequests/>}/>
         <Route path="/AcceptedCustomerRequests" element={<AcceptedCustomerRequests/>}/>
