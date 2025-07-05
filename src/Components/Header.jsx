@@ -30,7 +30,20 @@ function Header() {
             { userType === 'customer' && (
               <>
               <Nav.Link className='text-white' onClick={() => navigate('/Dashboard')}>Dashboard</Nav.Link>
-              <Nav.Link className='text-white' onClick={() => navigate('/MyRequest')}>My Request</Nav.Link>
+
+              {/* test dropdown*/}
+              {/* <Nav.Link className='text-white' onClick={() => navigate('/MyRequest')}>My Request</Nav.Link> */}
+              <NavDropdown title={<span style={{ color: 'white' }}>My Requests</span>} id="basic-nav-dropdown">
+              <NavDropdown.Item onClick={() => navigate('/MyRequest')}>All Requests</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate('/PendingCustomerRequests')}>
+                Pending Requests
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate('/AcceptedCustomerRequests')}>Accepted Requests</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate('/CancelledCustomerRequests')}>Cancelled Requests</NavDropdown.Item>
+              
+            </NavDropdown>
+
+              {/* test dropdown*/}
               <Nav.Link href="#link" className='text-white' onClick={() => navigate('/Complain')}>Complain</Nav.Link>
               </>
             )
