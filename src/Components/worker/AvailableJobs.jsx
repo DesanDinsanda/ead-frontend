@@ -131,6 +131,7 @@ const getContractForCategory = async ()=>{
     });
     alert("Job Accepted");
     navigate('/availableJobs');
+
   } catch (error) {
     console.error("Accept failed:", error);
     alert("Failed to accept contract.");

@@ -16,6 +16,47 @@ function CancelledCustomerRequests() {
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const status = "Cancelled";
+  // const pending = "Pending";
+
+  //Repost
+  const [formData, setFormData] = useState({
+        // id:'',
+      title: '',
+      description: '',
+      addr_line_1: '',
+      addr_line_2: '',
+      addr_line_3: '',
+      // service_id: '',
+      // customer_id:'',
+      // request_status:''
+  
+  
+    });
+    const repost = async (id) => {
+  try {
+    const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts/${id}`);
+    const data = response.data;
+
+    await axios.put('http://localhost:8089/contract-service/customer/contracts', {
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      addr_line_1: data.addr_line_1,
+      addr_line_2: data.addr_line_2,
+      addr_line_3: data.addr_line_3,
+      service_id: data.service_id,
+      customer_id: data.customer_id,
+      request_status: "Pending"
+    });
+
+    alert("Successfully reposted");
+    fetchContracts(); 
+  } catch (error) {
+    console.error("Error fetching contract:", error);
+    alert("Failed to repost contract.");
+  }
+};
+
 
 
   useEffect(() => {
@@ -77,7 +118,7 @@ function CancelledCustomerRequests() {
                 <p>Location : {contract.addr_line_3}</p>
               </div>
               <div className='changeButtons'>
-                <Button variant="primary" className='me-3' onClick={() => navigate(`/editCustomerRequest/${contract.id}`)}>Update</Button>
+                <Button variant="primary" className='me-3' onClick={() => repost(contract.id)}>Repost</Button>
                 <Button variant="danger" onClick={() => {
                   setSelectedId(contract.id);
                   setShowModal(true);

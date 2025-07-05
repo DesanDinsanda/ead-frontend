@@ -123,8 +123,8 @@ function CreateRequest() {
 
           <div className="form-group">
             <label>Category</label>
-            <select name="service_id" value={formData.service_id} onChange={handleChange}>
-              <option value="">Select Category</option>
+            <select name="service_id" value={formData.service_id} style={{padding:13}} onChange={handleChange}>
+              <option value="" >Select Category</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
