@@ -7,16 +7,16 @@ import '../../Css/customerRequest.css';
 import { FileChartColumnIncreasing } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function AcceptedCustomerRequests() {
+  const [workerContracts, setworkerContracts] = useState([]);
    const [contracts, setContracts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
-
-  // Modal control
-  const [showModal, setShowModal] = useState(false);
-  const [selectedId, setSelectedId] = useState(null);
   const status = "Accepted";
+
+
 
 
   useEffect(() => {
@@ -33,19 +33,57 @@ function AcceptedCustomerRequests() {
       console.error("Error fetching Contracts:", error);
       alert("Failed to fetch contracts");
     }
+
+    try {
+      const workerRes = await axios.get('http://localhost:8089/contract-service/worker/contracts?status=Accepted');
+      setworkerContracts(workerRes.data);
+    } catch (error) {
+      console.error("Error fetching Contracts:", error);
+      alert("Failed to fetch contracts");
+    }
+
   };
 
-  const handleDelete = async () => {
+  const handleReject = async (CcontractId) => {
+    
+    const relatedWorkerContract = workerContracts.find(wc => wc.cust_contract_id === CcontractId);
+    const WcontractId = relatedWorkerContract?.id;
+
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you really want to cancel this contract?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, cancel it!'
+  });
+
+  if (result.isConfirmed) {
     try {
-      await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
-      alert("Contract deleted successfully");
-      setShowModal(false);
-      fetchContracts(); // refresh the list
+      if (WcontractId) {
+          await axios.patch(`http://localhost:8089/contract-service/worker/contracts/${WcontractId}/status`, {
+            status: 'Cancelled'
+          });
+        }
+
+      await axios.patch(`http://localhost:8089/contract-service/customer/contracts/${CcontractId}/status`, {
+        status: 'Cancelled'
+      });
+
+      await Swal.fire(
+        'Cancelled!',
+        'The contract has been cancelled successfully.',
+        'success'
+      );
+
+      fetchContracts();
     } catch (error) {
-      console.error("Error deleting contract:", error);
-      alert("Failed to delete contract");
+      console.error('Error cancelling contract:', error.response?.data || error.message);
+      Swal.fire('Error!', 'Failed to cancel the contract.', 'error');
     }
-  };
+  }
+};
 
 
   return (
@@ -79,10 +117,7 @@ function AcceptedCustomerRequests() {
               </div>
               <div className='changeButtons'>
                 <Button variant="primary" className='me-3' onClick={() => navigate(`/editCustomerRequest/${contract.id}`)}>Update</Button>
-                <Button variant="danger" onClick={() => {
-                  setSelectedId(contract.id);
-                  setShowModal(true);
-                }}>Delete</Button>
+                <Button variant="danger"  onClick={() => handleReject(contract.id)} >Reject</Button>
               </div>
             </div>
           ))
@@ -90,23 +125,7 @@ function AcceptedCustomerRequests() {
       </div>
 
 
-      {/* Delete Confirmation Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete this request?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      
 
       <Footer />
     </>
