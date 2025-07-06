@@ -29,6 +29,8 @@ import ViewRejectedContracts from './Components/worker/ViewRejectedContracts'
 import PendingCustomerRequests from './Components/Customer/PendingCustomerRequests'
 import AcceptedCustomerRequests from './Components/Customer/AcceptedCustomerRequests'
 import CancelledCustomerRequests from './Components/Customer/CancelledCustomerRequests'
+import CustomerNotificationList from './Components/Customer/CustomerNotificationList'
+import WorkerNotificationList from './Components/worker/WorkerNotificationList'
 
 
 
@@ -72,6 +74,9 @@ function App() {
         <Route path="/PendingCustomerRequests" element={<PendingCustomerRequests/>}/>
         <Route path="/AcceptedCustomerRequests" element={<AcceptedCustomerRequests/>}/>
         <Route path="/CancelledCustomerRequests" element={<CancelledCustomerRequests/>}/>
+
+        <Route path="/customerNotifications" element={<CustomerNotificationList/>}/>
+        <Route path="/workerNotifications" element={<WorkerNotificationList/>}/> 
 
 
 
