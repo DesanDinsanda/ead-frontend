@@ -46,8 +46,7 @@ function AcceptedCustomerRequests() {
 
   const handleReject = async (CcontractId) => {
     
-    const relatedWorkerContract = workerContracts.find(wc => wc.cust_contract_id === CcontractId);
-    const WcontractId = relatedWorkerContract?.id;
+   
 
   const result = await Swal.fire({
     title: 'Are you sure?',
@@ -61,13 +60,7 @@ function AcceptedCustomerRequests() {
 
   if (result.isConfirmed) {
     try {
-      if (WcontractId) {
-          await axios.patch(`http://localhost:8089/contract-service/worker/contracts/${WcontractId}/status`, {
-            status: 'Cancelled'
-          });
-        }
-
-      await axios.patch(`http://localhost:8089/contract-service/customer/contracts/${CcontractId}/status`, {
+        await axios.patch(`http://localhost:8089/contract-service/customer/contracts/${CcontractId}/status`, {
         status: 'Cancelled'
       });
 
