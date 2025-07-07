@@ -4,6 +4,7 @@ import './UpdateAccount.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import Footer from '../Footer';
+import Swal from 'sweetalert2';
 
 export default function UpdateAccount() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function UpdateAccount() {
   });
 
   const [userType, setUserType] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const userId = sessionStorage.getItem('userId');
@@ -45,17 +47,61 @@ export default function UpdateAccount() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/;
+    const contactPattern = /^\d{10}$/;
+
+    if (!contactPattern.test(formData.contact)) {
+      setMessage('Contact number must be exactly 10 digits.');
+      return false;
+    }
+
+    if (!passwordPattern.test(formData.password) && formData.password !== '') {
+      setMessage('Password must include uppercase, lowercase, number, symbol, and be 10+ characters.');
+      return false;
+    }
+
+    return true;
+  };
+
   const handleUpdate = async () => {
+
+    if (!validateForm()) return;
+
+    const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you really want to update this account?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, update it!'
+      });
+
+      if (!result.isConfirmed) return;
+
     const endpoint =
       userType === 'worker'
-        ? `http://localhost:8087/worker-app/workers`
-        : `http://localhost:8086/customer-ms/customers`;
+        ? `http://localhost:8087/worker-app/workers/update`
+        : `http://localhost:8086/customer-ms/customers/update`;
 
     try {
       await axios.put(endpoint, formData);
-      alert('Account updated successfully!');
+      await Swal.fire(
+              'Updated!',
+              'The contract has been Updated successfully.',
+              'success'
+            );
+
+           setMessage(''); 
+
     } catch (error) {
-      alert('Failed to update account!');
+      if (error.response && error.response.status === 400) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage('An unexpected error occurred.');
+      }
+      Swal.fire('Error!', 'Failed to Update the account.', 'error');
     }
   };
 
@@ -106,6 +152,7 @@ export default function UpdateAccount() {
       
 
       <button onClick={handleUpdate}>Update</button>
+      <p>{message}</p>
     </div>
     <Footer/>
     </>

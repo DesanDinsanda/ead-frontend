@@ -4,6 +4,7 @@ import './deleteAccount.css';
 import Header from '../Header';
 import Footer from '../Footer';
 import { useNavigate } from 'react-router-dom'; 
+import Swal from 'sweetalert2';
 
 export default function DeleteAccount() {
   const navigate = useNavigate(); 
@@ -14,6 +15,18 @@ export default function DeleteAccount() {
     const userId = sessionStorage.getItem('userId');
     const userType = sessionStorage.getItem('userType');
 
+    const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you really want to Delete this account?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, Delete it!'
+          });
+    
+          if (!result.isConfirmed) return;
+
     // Choose correct endpoint based on user type
     const endpoint = userType === 'worker'
       ? `http://localhost:8087/worker-app/workers/${userId}`
@@ -21,12 +34,16 @@ export default function DeleteAccount() {
 
     try {
       await axios.delete(endpoint);
-      alert("Account deleted successfully!");
+      await Swal.fire(
+                    'Deleted!',
+                    'The account has been Deleted successfully.',
+                    'success'
+                  );
       sessionStorage.clear();
       navigate('/'); 
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Error deleting account.");
+      Swal.fire('Error!', 'Failed to Delete the account.', 'error');
     }
   };
 

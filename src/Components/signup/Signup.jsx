@@ -69,7 +69,7 @@ export default function Signup() {
       const endpoint =
         formData.userType === 'customer'
           ? 'http://localhost:8086/customer-ms/customers/signup'
-          : 'http://localhost:8087/worker-app/workers';
+          : 'http://localhost:8087/worker-app/workers/create';
 
       const response = await axios.post(endpoint, formData);
       setMessage('Signup successful!');
@@ -107,8 +107,11 @@ export default function Signup() {
         { service_id: '', work_experience: '' }
       ]);
     } catch (error) {
-      console.error(error);
-      setMessage('Signup failed!');
+      if (error.response && error.response.status === 400) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage('An unexpected error occurred.');
+      }
     }
   };
 

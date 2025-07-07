@@ -42,7 +42,7 @@ export default function Login() {
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setMessage('Invalid username or password!');
+        setMessage(error.response.data.message);
       } else {
         setMessage('Login failed!');
       }
