@@ -94,7 +94,7 @@ function CancelledCustomerRequests() {
       <div className='customerRequest'>
         <div className='newReq'>
           <div className='newReqText'>
-            <h2>My Service Requests</h2>
+            <h2>Cancelled Service Requests</h2>
             <p>View and manage all your service requests.</p>
           </div>
           <div className='newReqButton'>

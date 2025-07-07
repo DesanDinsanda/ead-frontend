@@ -8,11 +8,14 @@ import homeCleaning from '../images/homeCleaning.jpg';
 import flooring from '../images/flooring.jpg';
 import painting from '../images/painting.jpg';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 
 function Body() {
+  const navigate = useNavigate();
   const serviceCard = [ {
     id:1,
     imgsrc:plumber,
@@ -59,7 +62,7 @@ function Body() {
       <h1>ServiceConnect</h1>
       <p>The easiest way to find reliable service professionals for all your home maintenance and improvement needs.</p>
       <div class="buttons">
-        <a href="#" class="btn primary">Get Started</a>
+        <a  class="btn primary" onClick={() => navigate('/signup')}>Get Started</a>
       </div>
     </div>
   </div>

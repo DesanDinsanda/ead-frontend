@@ -77,7 +77,7 @@ function CustomerRequest() {
                 <p>Location : {contract.addr_line_3}</p>
               </div>
               <div className='changeButtons'>
-                <Button variant="primary" className='me-3' onClick={() => navigate(`/editCustomerRequest/${contract.id}`)}>Update</Button>
+                <Button variant="primary" className='me-3 ' onClick={() => navigate(`/editCustomerRequest/${contract.id}`)}>Update</Button>
                 <Button variant="danger" onClick={() => {
                   setSelectedId(contract.id);
                   setShowModal(true);

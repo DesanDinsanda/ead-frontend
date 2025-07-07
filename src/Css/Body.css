@@ -35,6 +35,10 @@ p {
   display: flex;
   gap: 15px;
 }
+.buttons:hover {
+  
+}
+
 
 .btn {
   padding: 12px 24px;
@@ -67,27 +71,55 @@ p {
 .infoDetails p{
   color:grey;
 }
-.infoBox{
+.infoBox {
   display: flex;
-  align-items: center;
-  
-  
-}
-.box{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 1rem;
-  box-shadow: 1px 1px 3px black;
-  padding: 1em 1em;
-  margin-right: 2em;
-  
-}
-.box p{
-  color: grey;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  background-color: #f9f9f9;
 }
 
+.box {
+  flex: 1 1 300px;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+}
+
+.box h4 {
+  margin-bottom: 1rem;
+  color: #007bff;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.box p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Hover effect */
+.box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  border-color: #007bff;
+}
+
+.box:hover h4 {
+  color: #0056b3;
+}
+
+
 .serviceImageContainer{
+  background-color: #FAFAFA;
 
 }
 .description{
@@ -99,28 +131,55 @@ p {
 .description p{
   color: grey;
 }
-.cardGrid{
+.cardGrid {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
 
-}
-.card p{
-  color: grey;
-}
-.card{
-    display: flex;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 1rem;
-  box-shadow: 1px 1px 3px black;
-  padding: 1em 1em;
-  margin: 1em 1em;
+.card {
   width: 420px;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.serviceImg{
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.serviceImg {
+  width: 100%;
+  height: 200px;
+  object-fit: contain; 
+  background-color: #f2f2f2;
+  border-radius: 0.5rem;
+  padding: 10px;
+}
+
+.card h2 {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: #007bff;
+}
+
+.card:hover h2 {
+  
+  color: blue;
+}
+
+.card p {
+  color: grey;
+  padding: 0 1rem 1rem;
+  text-align: center;
 }

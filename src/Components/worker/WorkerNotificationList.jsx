@@ -3,10 +3,16 @@ import axios from 'axios';
 import Header from '../Header';
 import Footer from '../Footer';
 import Swal from 'sweetalert2';
+import { MapPin, User, Phone, ListFilter, CalendarDays, Clock3, BookCheck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 function WorkerNotificationList() {
   const [notifications, setNotifications] = useState([]);
   const workerId = sessionStorage.getItem('userId'); // make sure userId is worker's ID
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchNotifications();
@@ -27,8 +33,7 @@ function WorkerNotificationList() {
   const handleMarkAsRead = async (notificationId) => {
     try {
       await axios.patch(`http://localhost:8090/notification-service/worker-notif/${notificationId}/mark-read`);
-      Swal.fire('Success', 'Notification marked as read.', 'success');
-      fetchNotifications(); // refresh list
+      navigate('/rejected-contracts');
     } catch (error) {
       console.error('Error updating notification status:', error);
       Swal.fire('Error', 'Failed to mark notification as read.', 'error');
@@ -45,38 +50,48 @@ function WorkerNotificationList() {
           <p>No notifications available.</p>
         ) : (
           <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
-            {notifications.map((notif) => (
-              <li
-                key={notif.id}
-                style={{
-                  backgroundColor: notif.status === 'Unread' ? '#f2f2f2' : '#d4edda',
-                  padding: '15px',
-                  marginBottom: '10px',
-                  borderRadius: '5px',
-                  border: '1px solid #ccc'
-                }}
-              >
-                <strong>{notif.title}</strong>
-                <p>{notif.description}</p>
-                <p>Status: {notif.status}</p>
-                {notif.status === 'Unread' && (
-                  <button
-                    onClick={() => handleMarkAsRead(notif.id)}
-                    style={{
-                      backgroundColor: '#007bff',
-                      color: 'white',
-                      border: 'none',
-                      padding: '8px 16px',
-                      borderRadius: '5px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    Mark as Read
-                  </button>
-                )}
-              </li>
-            ))}
+            {[...notifications]
+              .sort((a, b) => {
+                if (a.status === 'Unread' && b.status !== 'Unread') return -1;
+                if (a.status !== 'Unread' && b.status === 'Unread') return 1;
+                return 0;
+              })
+              .map((notif) => (
+                <li
+                  key={notif.id}
+                  style={{
+                    backgroundColor: notif.status === 'Unread' ? '#f2f2f2' : '#d4edda',
+                    padding: '15px',
+                    marginBottom: '10px',
+                    borderRadius: '5px',
+                    border: '1px solid #ccc'
+                  }}
+                >
+                  <strong>{notif.title}</strong>
+                  <p>{notif.description}</p>
+                  <p style={{ color: "grey", marginBottom: "1.2px" }}><CalendarDays size={16} /> Date : {notif.date}</p>
+                  <p style={{ color: "grey", marginBottom: "1.2px" }}><Clock3 size={16} /> Time : {notif.time}</p>
+                  <p style={{ color: "grey", marginBottom: "1.2px" }}><BookCheck size={16} /> Status: {notif.status}</p>
+
+                  {notif.status === 'Unread' && (
+                    <button
+                      onClick={() => handleMarkAsRead(notif.id)}
+                      style={{
+                        backgroundColor: '#007bff',
+                        color: 'white',
+                        border: 'none',
+                        padding: '8px 16px',
+                        borderRadius: '5px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Mark as Read
+                    </button>
+                  )}
+                </li>
+              ))}
           </ul>
+
         )}
       </div>
       <Footer />

@@ -28,16 +28,10 @@
     padding: 1.5rem;
     margin-top: 0.5em;
 }
-/* .serviceDetails{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-} */
+.serviceDetails{
+
+    width:80%;
+}
  .serviceDetails h4{
     color: blue;
  }

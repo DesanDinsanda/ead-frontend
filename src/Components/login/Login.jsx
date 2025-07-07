@@ -35,10 +35,10 @@ export default function Login() {
       sessionStorage.setItem('userType', formData.userType);
       setMessage('Login successful!');
       if (formData.userType === 'customer') {
-        navigate('/customer-home'); 
+        navigate('/ServiceConnect'); 
       }
       if (formData.userType === 'worker') {
-        navigate('/worker-home'); 
+        navigate('/ServiceConnect'); 
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
