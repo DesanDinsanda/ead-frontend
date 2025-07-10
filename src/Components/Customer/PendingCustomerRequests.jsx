@@ -39,6 +39,7 @@ function PendingCustomerRequests() {
   const handleDelete = async () => {
     try {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
       await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
       await Swal.fire(
@@ -47,6 +48,8 @@ function PendingCustomerRequests() {
                           'success'
                         );
 =======
+=======
+>>>>>>> Stashed changes
       await axios.delete(`http://localhost:8089/contract-service/customers/contracts/${selectedId}`);
       alert("Contract deleted successfully");
 >>>>>>> Stashed changes
