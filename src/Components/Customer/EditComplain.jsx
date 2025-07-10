@@ -26,7 +26,7 @@ function EditComplain() {
       setComlainID(response.data.id);
     } catch (error) {
       console.error("Failed to fetch complain", error);
-      alert("Failed to load complain details.");
+      Swal.fire('Error!', 'Failed to fetch the complains.', 'error');
     }
   };
 

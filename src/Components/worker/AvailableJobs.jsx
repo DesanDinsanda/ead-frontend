@@ -51,7 +51,7 @@ const fetchContracts = async () => {
 
   } catch (error) {
     console.error("Error fetching contracts or customers:", error);
-    alert("Failed to fetch data");
+    Swal.fire('Error!', 'Failed to fetch the contract or customer.', 'error');
   }
 };
 
@@ -81,7 +81,7 @@ const handleSearch = async () => {
     setContracts(contractsWithCustomer);
   } catch (error) {
     console.error("Error during search:", error);
-    alert("Failed to perform search.");
+    Swal.fire('Error!', 'Failed to search.', 'error');
   }
 };
 
@@ -91,7 +91,7 @@ const fetchServiceCategories = async () => {
     setServiceCategories(response.data);
   } catch (error) {
     console.error("Error fetching service categories:", error);
-    alert("Failed to load service categories");
+    Swal.fire('Error!', 'Failed to fetch the category.', 'error');
   }
 };
 
@@ -118,7 +118,7 @@ const getContractForCategory = async ()=>{
       setShowFilterModal(false);
     } catch (error) {
       console.error("Error filtering by service type:", error);
-      alert("Failed to filter by service type");
+      Swal.fire('Error!', 'Failed to filter the service.', 'error');
     }
   }
 

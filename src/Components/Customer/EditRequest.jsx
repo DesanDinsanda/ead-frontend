@@ -48,7 +48,7 @@ function EditRequest() {
       });
     } catch (error) {
       console.error("Error fetching contract:", error);
-      alert("Failed to load contract data.");
+      Swal.fire('Error!', 'Failed to fetch the contract.', 'error');
     }
   };
 
@@ -60,7 +60,7 @@ function EditRequest() {
     try {
 
 
-      await axios.put('http://localhost:8089/contract-service/customers/contracts', {
+      const response = await axios.put('http://localhost:8089/contract-service/customers/contracts', {
         id : formData.id,
         title: formData.title,
         description: formData.description,
@@ -82,8 +82,12 @@ function EditRequest() {
       navigate('/CustomerRequest'); // navigate back if needed
 
     } catch (error) {
-      Swal.fire('Error!', 'Failed to update the contact.', 'error');
-      alert("Failed to update contract.");
+      
+      if (error.response && error.response.status === 400) {
+              Swal.fire('Error!', error.response.data.message , 'error');
+            } else {
+              Swal.fire('Error!', 'Failed to update the contact.', 'error');
+            }
     }
   };
 

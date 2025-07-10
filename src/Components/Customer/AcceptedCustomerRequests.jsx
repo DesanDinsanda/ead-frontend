@@ -54,7 +54,7 @@ function AcceptedCustomerRequests() {
       setContracts(contractsWithWorkers);
     } catch (error) {
       console.error("Error fetching contracts or workers:", error);
-      alert("Failed to fetch contract or worker data.");
+      Swal.fire('Error!', 'Failed to fetch contracts or workers', 'error');
     }
   };
 
@@ -71,7 +71,7 @@ function AcceptedCustomerRequests() {
 
     if (result.isConfirmed) {
       try {
-        await axios.patch(`http://localhost:8089/contract-service/customers/contracts/${contractId}/status`, {
+        const response = await axios.patch(`http://localhost:8089/contract-service/customers/contracts/${contractId}/status`, {
           status: 'Cancelled'
         });
 
@@ -79,7 +79,11 @@ function AcceptedCustomerRequests() {
         fetchContractsWithWorkerDetails(); // Refresh
       } catch (error) {
         console.error('Error cancelling contract:', error.response?.data || error.message);
-        Swal.fire('Error!', 'Failed to cancel the contract.', 'error');
+        if (error.response && error.response.status === 400) {
+          Swal.fire('Error!', error.response.data.message , 'error');
+        } else {
+          Swal.fire('Error!', 'Failed to delete the contract.', 'error');
+        }
       }
     }
   };

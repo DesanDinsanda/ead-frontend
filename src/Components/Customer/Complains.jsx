@@ -28,7 +28,7 @@ function Complains() {
       setIsLoaded(true);
     } catch (error) {
       console.error("Error fetching Complains:", error);
-      alert("Failed to fetch Complains");
+      Swal.fire('Error!', 'Failed to fetch the complains.', 'error');
     }
   };
 

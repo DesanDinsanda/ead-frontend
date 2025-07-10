@@ -31,13 +31,13 @@ function CustomerRequest() {
       setIsLoaded(true);
     } catch (error) {
       console.error("Error fetching Contracts:", error);
-      alert("Failed to fetch contracts");
+      Swal.fire('Error!', 'Failed to fetct the contracts.', 'error');
     }
   };
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8089/contract-service/customers/contracts/${selectedId}`);
+      const response = await axios.delete(`http://localhost:8089/contract-service/customers/contracts/${selectedId}`);
       await Swal.fire(
               'Deleted!',
               'The contract has been deleted successfully.',
@@ -48,7 +48,16 @@ function CustomerRequest() {
       fetchContracts(); // refresh the list
     } catch (error) {
       console.error("Error deleting contract:", error);
+<<<<<<< Updated upstream
       Swal.fire('Error!', 'Failed to delete the contact.', 'error');
+=======
+      if (error.response && error.response.status === 400) {
+              Swal.fire('Error!', error.response.data.message , 'error');
+            } else {
+              Swal.fire('Error!', 'Failed to delete the contract.', 'error');
+            }
+      
+>>>>>>> Stashed changes
     }
   };
 

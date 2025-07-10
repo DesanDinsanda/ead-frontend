@@ -32,7 +32,7 @@ function PendingCustomerRequests() {
       setIsLoaded(true);
     } catch (error) {
       console.error("Error fetching Contracts:", error);
-      alert("Failed to fetch contracts");
+      Swal.fire('Error!', 'Failed to fetch the contract.', 'error');
     }
   };
 
@@ -48,7 +48,11 @@ function PendingCustomerRequests() {
       fetchContracts(); // refresh the list
     } catch (error) {
       console.error("Error deleting contract:", error);
-      Swal.fire('Error!', 'Failed to delete the contact.', 'error');;
+      if (error.response && error.response.status === 400) {
+                    Swal.fire('Error!', error.response.data.message , 'error');
+                  } else {
+                    Swal.fire('Error!', 'Failed to delete the contract.', 'error');
+                  }
     }
   };
 

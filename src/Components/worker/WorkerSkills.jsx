@@ -80,7 +80,6 @@ export default function WorkerSkills() {
         <table className="skills-table">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Service Name</th>
               <th>Experience (Years)</th>
               <th>Action</th>
@@ -89,7 +88,6 @@ export default function WorkerSkills() {
           <tbody>
             {skills.map((skill) => (
               <tr key={skill.id}>
-                <td>{skill.id}</td>
                 <td>{getServiceName(skill.service_id)}</td>
                 <td>{skill.work_experience}</td>
                 <td>
@@ -104,6 +102,7 @@ export default function WorkerSkills() {
         <p>No skills found.</p>
       )}
     </div>
+
     <Footer/>
     </>
   );

@@ -43,7 +43,6 @@ export default function EditSkills() {
     
           if (!result.isConfirmed) return;
     try {
-      console.log('Submitting data:', formData); 
 
       await axios.put('http://localhost:8087/worker-app/skills', formData);
       await Swal.fire(
@@ -64,10 +63,6 @@ export default function EditSkills() {
       <div className="edit-skill-container">
         <h2>Edit Skill</h2>
         <form onSubmit={handleUpdate} className="edit-skill-form">
-
-          {/* Read-only work_id display (optional) */}
-          <label>Worker ID</label>
-          <input type="text" value={formData.work_id} readOnly />
 
           <label>Service</label>
           <select

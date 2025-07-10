@@ -25,6 +25,12 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //admin login hardcode
+    if (formData.userType === 'Admin' && formData.username === 'Hiruna' && formData.password === 'Hiruna@1000') {
+      navigate('/adminPanel')
+      return;
+    }
+
     try {
       const endpoint = formData.userType === 'customer'
         ? 'http://localhost:8086/customer-ms/customers/login'
@@ -40,6 +46,8 @@ export default function Login() {
       if (formData.userType === 'worker') {
         navigate('/ServiceConnect'); 
       }
+
+      
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setMessage(error.response.data.message);
@@ -56,7 +64,6 @@ export default function Login() {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
 
-        {/* Select user type */}
         <select
           name="userType"
           value={formData.userType}
@@ -66,9 +73,9 @@ export default function Login() {
         >
           <option value="customer">Customer</option>
           <option value="worker">Worker</option>
+          <option value="Admin">Admin</option>
         </select><br />
 
-        {/* Username input */}
         <input
           className='login-input'
           type="text"
@@ -79,7 +86,6 @@ export default function Login() {
           required
         /><br />
 
-        {/* Password input */}
         <input
           className='login-input'
           type="password"
@@ -100,7 +106,6 @@ export default function Login() {
       </form>
       
 
-      {/* Display message */}
       {message && (
         <p className={`login-message ${message === 'Login successful!' ? 'success' : 'error'}`}>
           {message}
