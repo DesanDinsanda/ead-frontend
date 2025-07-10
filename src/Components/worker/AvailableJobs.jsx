@@ -125,10 +125,7 @@ const getContractForCategory = async ()=>{
 
   const acceptJob = async (contractId) => {
   try {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-    const result = await Swal.fire({
+     const result = await Swal.fire({
             title: 'Are you sure?',
             text: 'Do you really want to accept this job?',
             icon: 'warning',
@@ -140,13 +137,8 @@ const getContractForCategory = async ()=>{
     
           if (!result.isConfirmed) return;
 
-    await axios.post('http://localhost:8089/contract-service/worker/contracts', {
-=======
     await axios.post('http://localhost:8089/contract-service/workers/contracts', {
->>>>>>> Stashed changes
-=======
-    await axios.post('http://localhost:8089/contract-service/workers/contracts', {
->>>>>>> Stashed changes
+
       cust_contract_id: contractId,
       worker_id: userId,
       job_status: accepted

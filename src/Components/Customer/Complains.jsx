@@ -35,12 +35,16 @@ function Complains() {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8085/complain-service/complains/${selectedComplainId}`);
-      alert("Complain deleted successfully");
+      await Swal.fire(
+                          'Deleted!',
+                          'The complain has been deleted successfully.',
+                          'success'
+                          );
       setShowModal(false);
       fetchComplains(); // refresh list
     } catch (error) {
       console.error("Error deleting complain:", error);
-      alert("Failed to delete complain");
+      Swal.fire('Error!', 'Failed to delete the complain.', 'error');
     }
   };
 

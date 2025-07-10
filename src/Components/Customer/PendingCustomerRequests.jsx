@@ -38,21 +38,12 @@ function PendingCustomerRequests() {
 
   const handleDelete = async () => {
     try {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-      await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
+      await axios.delete(`http://localhost:8089/contract-service/customers/contracts/${selectedId}`);
       await Swal.fire(
                           'Deleted!',
                           'The complain has been deleted successfully.',
                           'success'
                         );
-=======
-=======
->>>>>>> Stashed changes
-      await axios.delete(`http://localhost:8089/contract-service/customers/contracts/${selectedId}`);
-      alert("Contract deleted successfully");
->>>>>>> Stashed changes
       setShowModal(false);
       fetchContracts(); // refresh the list
     } catch (error) {
