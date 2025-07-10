@@ -31,7 +31,7 @@ function AvailableJobs() {
 
 const fetchContracts = async () => {
   try {
-    const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts?status=${pending}`);
+    const response = await axios.get(`http://localhost:8089/contract-service/customers/contracts?status=${pending}`);
     const contracts = response.data;
 
     const customerRes = await axios.get('http://localhost:8086/customer-ms/customers');
@@ -58,8 +58,8 @@ const fetchContracts = async () => {
 const handleSearch = async () => {
   try {
     const url = searchTerm.trim()
-      ? `http://localhost:8089/contract-service/customer/contracts?keyword=${encodeURIComponent(searchTerm)}`
-      : 'http://localhost:8089/contract-service/customer/contracts';
+      ? `http://localhost:8089/contract-service/customers/contracts?keyword=${encodeURIComponent(searchTerm)}`
+      : 'http://localhost:8089/contract-service/customers/contracts';
 
     const response = await axios.get(url);
     const contracts = response.data;
@@ -97,7 +97,7 @@ const fetchServiceCategories = async () => {
 
 const getContractForCategory = async ()=>{
     try {
-      const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts?servId=${selectedServiceType}`);
+      const response = await axios.get(`http://localhost:8089/contract-service/customers/contracts?servId=${selectedServiceType}`);
       const contracts = response.data;
 
       const customerRes = await axios.get('http://localhost:8086/customer-ms/customers');
@@ -125,6 +125,7 @@ const getContractForCategory = async ()=>{
 
   const acceptJob = async (contractId) => {
   try {
+<<<<<<< Updated upstream
 
     const result = await Swal.fire({
             title: 'Are you sure?',
@@ -139,6 +140,9 @@ const getContractForCategory = async ()=>{
           if (!result.isConfirmed) return;
 
     await axios.post('http://localhost:8089/contract-service/worker/contracts', {
+=======
+    await axios.post('http://localhost:8089/contract-service/workers/contracts', {
+>>>>>>> Stashed changes
       cust_contract_id: contractId,
       worker_id: userId,
       job_status: accepted

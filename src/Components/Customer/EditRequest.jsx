@@ -30,7 +30,7 @@ function EditRequest() {
   }, []);
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts/${id}`);
+      const response = await axios.get(`http://localhost:8089/contract-service/customers/contracts/${id}`);
       const data = response.data;
 
       setFormData({
@@ -60,7 +60,7 @@ function EditRequest() {
     try {
 
 
-      await axios.put('http://localhost:8089/contract-service/customer/contracts', {
+      await axios.put('http://localhost:8089/contract-service/customers/contracts', {
         id : formData.id,
         title: formData.title,
         description: formData.description,

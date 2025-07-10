@@ -23,11 +23,11 @@ function AcceptedCustomerRequests() {
       const customerId = sessionStorage.getItem('userId');
 
       // 1. Get accepted customer contracts
-      const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts?status=${status}&id=${customerId}`);
+      const response = await axios.get(`http://localhost:8089/contract-service/customers/contracts?status=${status}&id=${customerId}`);
       const customerContracts = response.data;
 
       // 2. Get all accepted worker contracts
-      const workerContractsRes = await axios.get('http://localhost:8089/contract-service/worker/contracts?status=Accepted');
+      const workerContractsRes = await axios.get('http://localhost:8089/contract-service/workers/contracts?status=Accepted');
       const workerContracts = workerContractsRes.data;
 
       // 3. Get all workers
@@ -71,7 +71,7 @@ function AcceptedCustomerRequests() {
 
     if (result.isConfirmed) {
       try {
-        await axios.patch(`http://localhost:8089/contract-service/customer/contracts/${contractId}/status`, {
+        await axios.patch(`http://localhost:8089/contract-service/customers/contracts/${contractId}/status`, {
           status: 'Cancelled'
         });
 

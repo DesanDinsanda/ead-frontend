@@ -19,8 +19,8 @@ export default function MyJobs() {
   const fetchContacts = async () => {
     try {
       const [customerRes, workerRes, allCustomersRes] = await Promise.all([
-        axios.get('http://localhost:8089/contract-service/customer/contracts'),
-        axios.get(`http://localhost:8089/contract-service/worker/contracts?workerId=${workerId}`),
+        axios.get('http://localhost:8089/contract-service/customers/contracts'),
+        axios.get(`http://localhost:8089/contract-service/workers/contracts?workerId=${workerId}`),
         axios.get('http://localhost:8086/customer-ms/customers')
       ]);
 

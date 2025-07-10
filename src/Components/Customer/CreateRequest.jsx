@@ -52,7 +52,7 @@ function CreateRequest() {
     try {
 
 
-      await axios.post('http://localhost:8089/contract-service/customer/contracts', {
+      await axios.post('http://localhost:8089/contract-service/customers/contracts', {
         title: formData.title,
         description: formData.description,
         addr_line_1: formData.addr_line_1,

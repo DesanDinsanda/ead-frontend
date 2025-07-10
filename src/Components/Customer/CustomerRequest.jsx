@@ -26,7 +26,7 @@ function CustomerRequest() {
   const fetchContracts = async () => {
     try {
       const customerId = sessionStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts?cusId=${customerId}`);
+      const response = await axios.get(`http://localhost:8089/contract-service/customers/contracts?cusId=${customerId}`);
       setContracts(response.data);
       setIsLoaded(true);
     } catch (error) {
@@ -37,12 +37,17 @@ function CustomerRequest() {
 
   const handleDelete = async () => {
     try {
+<<<<<<< Updated upstream
       await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
       await Swal.fire(
               'Deleted!',
               'The contract has been deleted successfully.',
               'success'
               );
+=======
+      await axios.delete(`http://localhost:8089/contract-service/customers/contracts/${selectedId}`);
+      alert("Contract deleted successfully");
+>>>>>>> Stashed changes
       setShowModal(false);
       fetchContracts(); // refresh the list
     } catch (error) {

@@ -36,10 +36,10 @@ function CancelledCustomerRequests() {
     });
     const repost = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts/${id}`);
+    const response = await axios.get(`http://localhost:8089/contract-service/customers/contracts/${id}`);
     const data = response.data;
 
-    await axios.put('http://localhost:8089/contract-service/customer/contracts', {
+    await axios.put('http://localhost:8089/contract-service/customers/contracts', {
       id: data.id,
       title: data.title,
       description: data.description,
@@ -72,7 +72,7 @@ function CancelledCustomerRequests() {
   const fetchContracts = async () => {
     try {
       const customerId = sessionStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:8089/contract-service/customer/contracts?status=${status}&id=${customerId}`);
+      const response = await axios.get(`http://localhost:8089/contract-service/customers/contracts?status=${status}&id=${customerId}`);
       setContracts(response.data);
       setIsLoaded(true);
     } catch (error) {
@@ -83,12 +83,17 @@ function CancelledCustomerRequests() {
 
   const handleDelete = async () => {
     try {
+<<<<<<< Updated upstream
       await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
       await Swal.fire(
                     'Deleted!',
                     'The contract has been deleted successfully.',
                     'success'
                     );
+=======
+      await axios.delete(`http://localhost:8089/contract-service/customers/contracts/${selectedId}`);
+      alert("Contract deleted successfully");
+>>>>>>> Stashed changes
       setShowModal(false);
       fetchContracts(); // refresh the list
     } catch (error) {

@@ -18,8 +18,8 @@ export default function ViewAcceptedContracts() {
   const fetchContacts = async () => {
     try {
       const [customerRes, workerRes, allCustomersRes] = await Promise.all([
-        axios.get('http://localhost:8089/contract-service/customer/contracts'),
-        axios.get('http://localhost:8089/contract-service/worker/contracts?status=Accepted'),
+        axios.get('http://localhost:8089/contract-service/customers/contracts'),
+        axios.get('http://localhost:8089/contract-service/workers/contracts?status=Accepted'),
         axios.get('http://localhost:8086/customer-ms/customers') 
       ]);
 
@@ -65,11 +65,11 @@ export default function ViewAcceptedContracts() {
 
   if (result.isConfirmed) {
     try {
-      await axios.patch(`http://localhost:8089/contract-service/worker/contracts/${WcontractId}/status`, {
+      await axios.patch(`http://localhost:8089/contract-service/workers/contracts/${WcontractId}/status`, {
         status: 'Cancelled'
       });
 
-      await axios.patch(`http://localhost:8089/contract-service/customer/contracts/${CcontractId}/status`, {
+      await axios.patch(`http://localhost:8089/contract-service/customers/contracts/${CcontractId}/status`, {
         status: 'Cancelled'
       });
 

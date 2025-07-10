@@ -18,8 +18,8 @@ export default function ViewRejectedContracts() {
   const fetchContacts = async () => {
     try {
       const [customerRes, workerRes, allCustomersRes] = await Promise.all([
-        axios.get('http://localhost:8089/contract-service/customer/contracts'),
-        axios.get('http://localhost:8089/contract-service/worker/contracts?status=Cancelled'),
+        axios.get('http://localhost:8089/contract-service/customers/contracts'),
+        axios.get('http://localhost:8089/contract-service/workers/contracts?status=Cancelled'),
         axios.get('http://localhost:8086/customer-ms/customers') 
       ]);
 
