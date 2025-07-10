@@ -4,6 +4,7 @@ import '../../Css/admin.css';
 import Header from '../Header';
 import Footer from '../Footer';
 import Button from 'react-bootstrap/Button';
+import Swal from 'sweetalert2';
 
 
 
@@ -70,11 +71,32 @@ export default function Admin() {
   };
 
   const deleteService = async (id) => {
+
+    const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to Delete this skill?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Delete it!'
+              });
+        
+              if (!result.isConfirmed) return;
+
     try {
       await axios.delete(`http://localhost:8088/ServiceManagement-EAD/categories/${id}`);
+
+      await Swal.fire(
+                          'Deleted!',
+                          'The skill has been Deleted successfully.',
+                          'success'
+                        );
+
       fetchServices();
     } catch (error) {
       console.error('Error deleting service:', error);
+      Swal.fire('Error!', 'Failed to Delete the account.', 'error');
     }
   };
 
@@ -84,25 +106,64 @@ export default function Admin() {
 
   const updateService = async () => {
     try {
+
+     const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to update this skill?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, update it!'
+              });
+        
+              if (!result.isConfirmed) return;
+
       await axios.put('http://localhost:8088/ServiceManagement-EAD/categories', {
         id:editService.id,name: editService.category
       });
+
+      await Swal.fire(
+                          'Updated!',
+                          'The skill has been updated successfully.',
+                          'success'
+                        );
+
       setEditService({ id: null, category: '' });
       fetchServices();
     } catch (error) {
       console.error('Error updating service:', error);
+      Swal.fire('Error!', 'Failed to update the skill.', 'error');
     }
   };
 
   const resolveComplain = async (complainId) =>{
+    const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to resolve this complain?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, resolve it!'
+              });
+        
+              if (!result.isConfirmed) return;
     try {
       await axios.put(`http://localhost:8085/complain-service/complains?id=${complainId}`, {
         id:editService.id,name: editService.category
       });
+
+      await Swal.fire(
+                          'Resolved!',
+                          'The complain has been resolved successfully.',
+                          'success'
+                        );
       
       fetchComplains();
     } catch (error) {
       console.error('Error updating service:', error);
+      Swal.fire('Error!', 'Failed to Resolve the complain.', 'error');
     }
   }
 

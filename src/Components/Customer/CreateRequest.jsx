@@ -32,12 +32,9 @@ function CreateRequest() {
       const response = await axios.get('http://localhost:8088/ServiceManagement-EAD/categories');
       setCategories(response.data);
     } catch (error) {
-<<<<<<< Updated upstream
-      alert("Failed to load categories");
-=======
       console.error("Error fetching categories:", error);
       Swal.fire('Error!', 'Failed to load the categories.', 'error');
->>>>>>> Stashed changes
+
     }
   };
 
@@ -53,41 +50,18 @@ function CreateRequest() {
     e.preventDefault(); // Prevent form default behavior
 
     try {
-<<<<<<< Updated upstream
-      await axios.post('http://localhost:8089/contract-service/customers/contracts', formData);
+
+      const response = await axios.post('http://localhost:8089/contract-service/customers/contracts', formData);
       await Swal.fire('Created!', 'The contract has been created successfully.', 'success');
       navigate('/MyRequest');
-    } catch (error) {
-      Swal.fire('Error!', 'Failed to create the contract.', 'error');
-=======
-
-
-      const response = await axios.post('http://localhost:8089/contract-service/customers/contracts', {
-        title: formData.title,
-        description: formData.description,
-        addr_line_1: formData.addr_line_1,
-        addr_line_2: formData.addr_line_2,
-        addr_line_3: formData.addr_line_3,
-        service_id: formData.service_id,
-        customer_id: formData.customer_id,
-        request_status: formData.request_status
-
-
-      });
-      await Swal.fire(
-        'Created!',
-        'The contract has been created successfully.',
-        'success'
-        );
-      navigate('/MyRequest'); // navigate back if needed
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire('Error!', error.response.data.message , 'error');
       } else {
         Swal.fire('Error!', 'Failed to create the contact.', 'error');
       }
->>>>>>> Stashed changes
-    }
+    };
+      
   };
 
   return (

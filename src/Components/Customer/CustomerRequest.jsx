@@ -48,16 +48,12 @@ function CustomerRequest() {
       fetchContracts(); // refresh the list
     } catch (error) {
       console.error("Error deleting contract:", error);
-<<<<<<< Updated upstream
-      Swal.fire('Error!', 'Failed to delete the contact.', 'error');
-=======
       if (error.response && error.response.status === 400) {
               Swal.fire('Error!', error.response.data.message , 'error');
             } else {
               Swal.fire('Error!', 'Failed to delete the contract.', 'error');
             }
-      
->>>>>>> Stashed changes
+
     }
   };
 
