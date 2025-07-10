@@ -1,18 +1,28 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import Footer from '../Footer';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import axios from 'axios';
-import '../../Css/EditRequest.css'
+import '../../Css/EditRequest.css';
 import Swal from 'sweetalert2';
 
 function CreateRequest() {
-
   const customerId = parseInt(sessionStorage.getItem('userId'));
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
+
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    addr_line_1: '',
+    addr_line_2: '',
+    addr_line_3: '',
+    service_id: '',
+    customer_id: customerId,
+    request_status: 'Pending',
+  });
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -22,59 +32,30 @@ function CreateRequest() {
       const response = await axios.get('http://localhost:8088/ServiceManagement-EAD/categories');
       setCategories(response.data);
     } catch (error) {
-      console.error("Error fetching categories:", error);
       alert("Failed to load categories");
     }
   };
 
-  const [formData, setFormData] = useState({
-    // id:'',
-    title: '',
-    description: '',
-    addr_line_1: '',
-    addr_line_2: '',
-    addr_line_3: '',
-    service_id: '',
-    customer_id: customerId,
-    request_status: 'Pending'
-
-  });
-
-
   const handleChange = (e) => {
-  const { name, value } = e.target;
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: name === 'service_id' ? parseInt(value) : value,
+    });
+  };
 
-  setFormData({...formData, [name]: name === "service_id" ? parseInt(value) : value
-  });
-};
+  const handleSave = async (e) => {
+    e.preventDefault(); // Prevent form default behavior
 
-  const handleSave = async () => {
     try {
-
-
-      await axios.post('http://localhost:8089/contract-service/customers/contracts', {
-        title: formData.title,
-        description: formData.description,
-        addr_line_1: formData.addr_line_1,
-        addr_line_2: formData.addr_line_2,
-        addr_line_3: formData.addr_line_3,
-        service_id: formData.service_id,
-        customer_id: formData.customer_id,
-        request_status: formData.request_status
-
-
-      });
-      await Swal.fire(
-        'Created!',
-        'The contract has been created successfully.',
-        'success'
-        );
-      navigate('/MyRequest'); // navigate back if needed
+      await axios.post('http://localhost:8089/contract-service/customers/contracts', formData);
+      await Swal.fire('Created!', 'The contract has been created successfully.', 'success');
+      navigate('/MyRequest');
     } catch (error) {
-      Swal.fire('Error!', 'Failed to create the contact.', 'error');
-      alert("Failed to create request.");
+      Swal.fire('Error!', 'Failed to create the contract.', 'error');
     }
   };
+
   return (
     <>
       <Header />
@@ -82,12 +63,14 @@ function CreateRequest() {
         <h2>Create New Service Request</h2>
         <p className="subtitle">Fill out the form below to request a service from our professionals.</p>
 
-        <div className="form-card">
+        <form className="form-card" onSubmit={handleSave}>
           <div className="form-group">
             <label>Service Title</label>
             <input
               type="text"
               name="title"
+              required
+              value={formData.title}
               onChange={handleChange}
             />
           </div>
@@ -97,39 +80,53 @@ function CreateRequest() {
             <textarea
               rows="3"
               name="description"
+              required
+              value={formData.description}
               onChange={handleChange}
             ></textarea>
           </div>
 
           <div className="form-group">
-            <label><MapPin size={16} className="icon" /> Adress Line 1</label>
+            <label><MapPin size={16} className="icon" /> Address Line 1</label>
             <input
               type="text"
               name="addr_line_1"
+              required
+              value={formData.addr_line_1}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label><MapPin size={16} className="icon" /> Adress Line 2</label>
+            <label><MapPin size={16} className="icon" /> Address Line 2</label>
             <input
               type="text"
               name="addr_line_2"
+              required
+              value={formData.addr_line_2}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label><MapPin size={16} className="icon" /> Adress Line 3</label>
+            <label><MapPin size={16} className="icon" /> Address Line 3</label>
             <input
               type="text"
               name="addr_line_3"
+              required
+              value={formData.addr_line_3}
               onChange={handleChange}
             />
           </div>
 
           <div className="form-group">
             <label>Category</label>
-            <select name="service_id" value={formData.service_id} style={{padding:13}} onChange={handleChange}>
-              <option value="" >Select Category</option>
+            <select
+              name="service_id"
+              required
+              value={formData.service_id}
+              onChange={handleChange}
+              style={{ padding: 13 }}
+            >
+              <option value="">Select Category</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
@@ -138,19 +135,15 @@ function CreateRequest() {
             </select>
           </div>
 
-
-
-
           <div className="btn-group">
-            <button className="btn cancel" onClick={() => navigate(-1)}>Cancel</button>
-            <button className="btn save" onClick={handleSave}>Create a Request</button>
+            <button type="button" className="btn cancel" onClick={() => navigate(-1)}>Cancel</button>
+            <button type="submit" className="btn save">Create a Request</button>
           </div>
-        </div>
+        </form>
       </div>
-
       <Footer />
     </>
-  )
+  );
 }
 
-export default CreateRequest
+export default CreateRequest;

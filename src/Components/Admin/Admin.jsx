@@ -1,11 +1,244 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../../Css/admin.css';
+import Header from '../Header';
+import Footer from '../Footer';
+import Button from 'react-bootstrap/Button';
 
-function Admin() {
-  return (
-    <div>
+
+
+export default function Admin() {
+  const [activeTab, setActiveTab] = useState('workers');
+  const [workers, setWorkers] = useState([]);
+  const [complains, setComplains] = useState([]);
+  const [services, setServices] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [newService, setNewService] = useState('');
+  const [editService, setEditService] = useState({ id: null, category: '' });
+
+  useEffect(() => {
+    if (activeTab === 'workers') fetchWorkers();
+    else if (activeTab === 'complains') fetchComplains();
+    else fetchServices();
+  }, [activeTab]);
+
+  const fetchWorkers = async () => {
+    try {
+      const res = await axios.get('http://localhost:8087/worker-app/workers');
+      setWorkers(res.data);
+    } catch (error) {
+      console.error('Error fetching workers:', error);
+    }
+  };
+
+  const fetchComplains = async () => {
+    try {
+      const res = await axios.get('http://localhost:8085/complain-service/complains');
+      setComplains(res.data);
+    } catch (error) {
+      console.error('Error fetching complains:', error);
+    }
+  };
+
+  const fetchServices = async () => {
+    try {
+      const res = await axios.get('http://localhost:8088/ServiceManagement-EAD/categories');
+      setServices(res.data);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    }
+  };
+
+  const handleSearch = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8087/worker-app/workers?fname=${searchQuery}`);
+      setWorkers(res.data);
+    } catch (error) {
+      console.error('Error searching workers:', error);
+    }
+  };
+
+  const addService = async () => {
+    if (!newService.trim()) return;
+    try {
+      await axios.post('http://localhost:8088/ServiceManagement-EAD/categories', { name: newService });
       
-    </div>
-  )
-}
+      fetchServices();
+    } catch (error) {
+      console.error('Error adding service:', error);
+    }
+  };
 
-export default Admin
+  const deleteService = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8088/ServiceManagement-EAD/categories/${id}`);
+      fetchServices();
+    } catch (error) {
+      console.error('Error deleting service:', error);
+    }
+  };
+
+  const startEdit = (service) => {
+    setEditService({ id: service.id, category: service.category });
+  };
+
+  const updateService = async () => {
+    try {
+      await axios.put('http://localhost:8088/ServiceManagement-EAD/categories', {
+        id:editService.id,name: editService.category
+      });
+      setEditService({ id: null, category: '' });
+      fetchServices();
+    } catch (error) {
+      console.error('Error updating service:', error);
+    }
+  };
+
+  const resolveComplain = async (complainId) =>{
+    try {
+      await axios.put(`http://localhost:8085/complain-service/complains?id=${complainId}`, {
+        id:editService.id,name: editService.category
+      });
+      
+      fetchComplains();
+    } catch (error) {
+      console.error('Error updating service:', error);
+    }
+  }
+
+  return (
+    <>
+    <Header/>
+    <div className="admin-dashboard">
+      <h1>Admin Panel</h1>
+
+      <div className="adminButtons" style={{ marginBottom: '20px' }}>
+        <button type="button" class="btn btn-primary me-3" onClick={() => setActiveTab('workers')}>Workers</button>
+        <button type="button" class="btn btn-primary me-3" onClick={() => setActiveTab('complains')}>Complains</button>
+        <button type="button" class="btn btn-primary me-3" onClick={() => setActiveTab('services')}>Services</button>
+      </div>
+
+      {/* Workers Tab */}
+      {activeTab === 'workers' && (
+        <div>
+          <h2>All Workers</h2>
+          <input
+          className='inputSearch'
+            type="text"
+            placeholder="Search by Name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="button" class="btn btn-primary me-3" onClick={handleSearch}>Search</button>
+
+          <table border="1" cellPadding="10" style={{ marginTop: '20px' }}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {workers.map((worker) => (
+                <tr key={worker.id}>
+                  <td>{worker.id}</td>
+                  <td>{worker.fname}</td>
+                  <td>{worker.location}</td>
+                  <td>{worker.contact}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Complains Tab */}
+      {activeTab === 'complains' && (
+        <div>
+          <h2>All Complains</h2>
+          <table border="1" cellPadding="10">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {complains.map((c) => (
+                <tr key={c.id}>
+                  <td>{c.id}</td>
+                  <td>{c.title}</td>
+                  <td>{c.description}</td>
+                  <td>{c.status}</td>
+                  <td><button type="button" class="btn btn-primary me-3" style={{ width: '100px' }} onClick={() => resolveComplain(c.id)}>Resolve</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Services Tab */}
+      {activeTab === 'services' && (
+        <div>
+          <h2>All Services</h2>
+
+          <input
+          className='inputSearch'
+            type="text"
+            placeholder="New Service Category"
+            value={newService}
+            onChange={(e) => setNewService(e.target.value)}
+          />
+          <button type="button" class="btn btn-primary me-3" onClick={addService}>Add Service</button>
+
+          <table border="1" cellPadding="10" style={{ marginTop: '20px' }}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Service Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {services.map((service) => (
+                <tr key={service.id}>
+                  <td>{service.id}</td>
+                  <td>
+                    {editService.id === service.id ? (
+                      <input
+                        type="text"
+                        value={editService.category}
+                        onChange={(e) =>
+                          setEditService({ ...editService, category: e.target.value })
+                        }
+                      />
+                    ) : (
+                      service.name
+                    )}
+                  </td>
+                  <td>
+                    {editService.id === service.id ? (
+                      <button type="button" class="btn btn-primary me-3"  onClick={updateService}>Save</button>
+                    ) : (
+                      <button type="button" class="btn btn-primary me-3" onClick={() => startEdit(service)}>Edit</button>
+                    )}
+                    {/* <button type="button" class="btn btn-primary">Primary</button> */}
+                    <button type="button" class="btn btn-danger" onClick={() => deleteService(service.id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+    <Footer/>
+    </>
+  );
+}

@@ -48,7 +48,7 @@ function CustomerRequest() {
       fetchContracts(); // refresh the list
     } catch (error) {
       console.error("Error deleting contract:", error);
-      alert("Failed to delete contract");
+      Swal.fire('Error!', 'Failed to delete the contact.', 'error');
     }
   };
 

@@ -32,6 +32,7 @@ import AcceptedCustomerRequests from './Components/Customer/AcceptedCustomerRequ
 import CancelledCustomerRequests from './Components/Customer/CancelledCustomerRequests'
 import CustomerNotificationList from './Components/Customer/CustomerNotificationList'
 import WorkerNotificationList from './Components/worker/WorkerNotificationList'
+import Admin from './Components/Admin/Admin'
 
 
 
@@ -66,6 +67,7 @@ function App() {
         <Route path="/createRequest" element={<CreateRequest/>} />
         <Route path="/availableJobs" element={<AvailableJobs/>} />
         <Route path="/editComplain/:id" element={<EditComplain/>}/>
+        
 
 
         <Route path="/my-jobs" element={<MyJobs />} />
@@ -78,6 +80,8 @@ function App() {
 
         <Route path="/customerNotifications" element={<CustomerNotificationList/>}/>
         <Route path="/workerNotifications" element={<WorkerNotificationList/>}/> 
+
+        <Route path="/admin" element={<Admin/>} />
 
 
 
