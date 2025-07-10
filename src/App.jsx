@@ -9,8 +9,7 @@ import Login from './Components/login/Login'
 import ViewAccount from './Components/viewAccount/ViewAccount'
 import UpdateAccount from './Components/updateAccount/UpdateAccount'
 import DeleteAccount from './Components/deleteAccount/DeleteAccount'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 import Footer from './Components/Footer'
 import CustomerHome from './Components/Customer/CustomerHome'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -35,19 +34,12 @@ import CustomerNotificationList from './Components/Customer/CustomerNotification
 import WorkerNotificationList from './Components/worker/WorkerNotificationList'
 
 
-=======
-import Admin from './Components/Admin/Admin'
->>>>>>> Stashed changes
-=======
-import Admin from './Components/Admin/Admin'
->>>>>>> Stashed changes
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-<<<<<<< Updated upstream
       
 
       <Router>
@@ -93,14 +85,9 @@ function App() {
         
       </Routes>
     </Router>
-      
-=======
-      <Body/>
-      <Admin/>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
+
+
 
 
     </>

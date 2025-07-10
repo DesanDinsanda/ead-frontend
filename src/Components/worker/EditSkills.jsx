@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './EditSkills.css'; 
 import Header from '../Header';
 import Footer from '../Footer';
+import Swal from 'sweetalert2';
 
 export default function EditSkills() {
   const navigate = useNavigate();
@@ -30,15 +31,30 @@ export default function EditSkills() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you really want to update this skill?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, update it!'
+          });
+    
+          if (!result.isConfirmed) return;
     try {
       console.log('Submitting data:', formData); 
 
       await axios.put('http://localhost:8087/worker-app/skills', formData);
-      alert('Skill updated successfully!');
+      await Swal.fire(
+                    'Updated!',
+                    'The skill has been Updated successfully.',
+                    'success'
+                  );
       navigate('/view-skills');
     } catch (error) {
       console.error('Update error:', error);
-      alert('Failed to update skill.');
+      Swal.fire('Error!', 'Failed to Update the skill.', 'error');
     }
   };
 

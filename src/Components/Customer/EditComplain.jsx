@@ -4,6 +4,7 @@ import Footer from '../Footer';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../Css/EditComplain.css';
+import Swal from 'sweetalert2';
 
 function EditComplain() {
   const { id } = useParams();
@@ -41,11 +42,15 @@ function EditComplain() {
 
     try {
       const response = await axios.put('http://localhost:8085/complain-service/complains', complain);
-      alert("Complain updated successfully!");
+      await Swal.fire(
+                          'Updated!',
+                          'The complain has been Updated successfully.',
+                          'success'
+                        );
       navigate("/Complain");
     } catch (error) {
       console.error("Error updating complain", error);
-      alert("Failed to update complain");
+      Swal.fire('Error!', 'Failed to Update the account.', 'error');
     }
   };
 

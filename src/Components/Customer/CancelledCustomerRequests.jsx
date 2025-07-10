@@ -7,6 +7,8 @@ import '../../Css/customerRequest.css';
 import { FileChartColumnIncreasing } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 function CancelledCustomerRequests() {
   const [contracts, setContracts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -49,11 +51,15 @@ function CancelledCustomerRequests() {
       request_status: "Pending"
     });
 
-    alert("Successfully reposted");
+    await Swal.fire(
+                  'Reposted!',
+                  'The contract has been reposted successfully.',
+                  'success'
+                  );
     fetchContracts(); 
   } catch (error) {
     console.error("Error fetching contract:", error);
-    alert("Failed to repost contract.");
+    Swal.fire('Error!', 'Failed to repost the contact.', 'error');
   }
 };
 
@@ -78,12 +84,16 @@ function CancelledCustomerRequests() {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
-      alert("Contract deleted successfully");
+      await Swal.fire(
+                    'Deleted!',
+                    'The contract has been deleted successfully.',
+                    'success'
+                    );
       setShowModal(false);
       fetchContracts(); // refresh the list
     } catch (error) {
       console.error("Error deleting contract:", error);
-      alert("Failed to delete contract");
+      Swal.fire('Error!', 'Failed to delete the contact.', 'error');
     }
   };
 

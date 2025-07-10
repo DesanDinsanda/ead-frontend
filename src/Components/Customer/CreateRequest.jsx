@@ -6,6 +6,7 @@ import Footer from '../Footer';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import axios from 'axios';
 import '../../Css/EditRequest.css'
+import Swal from 'sweetalert2';
 
 function CreateRequest() {
 
@@ -63,10 +64,14 @@ function CreateRequest() {
 
 
       });
-      alert("Successfully created!");
+      await Swal.fire(
+        'Created!',
+        'The contract has been created successfully.',
+        'success'
+        );
       navigate('/MyRequest'); // navigate back if needed
     } catch (error) {
-      console.error("crerate failed:", error);
+      Swal.fire('Error!', 'Failed to create the contact.', 'error');
       alert("Failed to create request.");
     }
   };

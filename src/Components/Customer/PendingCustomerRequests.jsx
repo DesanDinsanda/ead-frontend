@@ -7,6 +7,7 @@ import '../../Css/customerRequest.css';
 import { FileChartColumnIncreasing } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function PendingCustomerRequests() {
     const [contracts, setContracts] = useState([]);
@@ -37,13 +38,18 @@ function PendingCustomerRequests() {
 
   const handleDelete = async () => {
     try {
+
       await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
-      alert("Contract deleted successfully");
+      await Swal.fire(
+                          'Deleted!',
+                          'The complain has been deleted successfully.',
+                          'success'
+                        );
       setShowModal(false);
       fetchContracts(); // refresh the list
     } catch (error) {
       console.error("Error deleting contract:", error);
-      alert("Failed to delete contract");
+      Swal.fire('Error!', 'Failed to delete the contact.', 'error');;
     }
   };
 

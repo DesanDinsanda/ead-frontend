@@ -4,6 +4,7 @@ import './WorkerSkills.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import Footer from '../Footer';
+import Swal from 'sweetalert2';
 
 export default function WorkerSkills() {
   const navigate = useNavigate();
@@ -34,14 +35,32 @@ export default function WorkerSkills() {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this skill?')) {
+    
+    const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to Delete this skill?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Delete it!'
+              });
+        
+              if (!result.isConfirmed) return;
+
       try {
         await axios.delete(`http://localhost:8087/worker-app/skills/${id}`);
+        await Swal.fire(
+                            'Deleted!',
+                            'The skill has been Deleted successfully.',
+                            'success'
+                          );
         fetchSkills();
       } catch (error) {
         console.error('Error deleting skill:', error);
+        Swal.fire('Error!', 'Failed to Delete the skill.', 'error');
       }
-    }
+    
   };
 
   const handleEdit = (skill) => {

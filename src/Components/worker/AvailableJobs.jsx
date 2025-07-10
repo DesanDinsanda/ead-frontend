@@ -8,6 +8,7 @@ import { FileChartColumnIncreasing } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { MapPin,User,Phone,ListFilter } from 'lucide-react';
+import Swal from 'sweetalert2';
 
 function AvailableJobs() {
 
@@ -124,17 +125,34 @@ const getContractForCategory = async ()=>{
 
   const acceptJob = async (contractId) => {
   try {
+
+    const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you really want to accept this job?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, accept it!'
+          });
+    
+          if (!result.isConfirmed) return;
+
     await axios.post('http://localhost:8089/contract-service/worker/contracts', {
       cust_contract_id: contractId,
       worker_id: userId,
       job_status: accepted
     });
     
-    alert("Job Accepted");
+    await Swal.fire(
+        'Accepted!',
+        'The job has been accepted successfully.',
+        'success'
+    );
     await fetchContracts(); 
   } catch (error) {
     console.error("Accept failed:", error);
-    alert("Failed to accept contract.");
+    Swal.fire('Error!', 'Failed to accept the contact.', 'error');
   }
 };
 

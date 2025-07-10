@@ -4,6 +4,7 @@ import Footer from '../Footer';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../Css/EditComplain.css';
+import Swal from 'sweetalert2';
 
 function NewComplain() {
   const navigate = useNavigate();
@@ -23,11 +24,15 @@ function NewComplain() {
 
     try {
       const response = await axios.post('http://localhost:8085/complain-service/complains', complain);
-      alert("Complain created successfully!");
+      await Swal.fire(
+                    'Created!',
+                    'The complain has been Created successfully.',
+                    'success'
+                  );
       navigate("/Complain");
     } catch (error) {
       console.error("Error creating complain", error);
-      alert("Failed to create complain");
+      Swal.fire('Error!', 'Failed to Create the account.', 'error');
     }
   };
   return (
@@ -42,11 +47,11 @@ function NewComplain() {
           <div className='editContent'>
             <div className='pairs'>
               <label htmlFor="title">Title</label><br />
-              <input type="text"id="title" onChange={(e) => setTitle(e.target.value)} />
+              <input type="text"id="title" onChange={(e) => setTitle(e.target.value)} required/>
             </div>
             <div className='pairs'>
               <label htmlFor="description">Description</label><br />
-              <textarea id="description" onChange={(e) => setDescription(e.target.value)} ></textarea>
+              <textarea id="description" onChange={(e) => setDescription(e.target.value)} required></textarea>
             </div>
           </div>
 

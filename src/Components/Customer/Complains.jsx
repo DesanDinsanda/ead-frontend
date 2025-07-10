@@ -7,6 +7,7 @@ import { FileChartColumnIncreasing } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../Css/customerRequest.css';
+import Swal from 'sweetalert2';
 
 function Complains() {
   const [complains, setComplains] = useState([]);

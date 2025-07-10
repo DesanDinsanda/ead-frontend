@@ -7,6 +7,7 @@ import '../../Css/customerRequest.css';
 import { FileChartColumnIncreasing } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function CustomerRequest() {
   const [contracts, setContracts] = useState([]);
@@ -37,7 +38,11 @@ function CustomerRequest() {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8089/contract-service/customer/contracts/${selectedId}`);
-      alert("Contract deleted successfully");
+      await Swal.fire(
+              'Deleted!',
+              'The contract has been deleted successfully.',
+              'success'
+              );
       setShowModal(false);
       fetchContracts(); // refresh the list
     } catch (error) {

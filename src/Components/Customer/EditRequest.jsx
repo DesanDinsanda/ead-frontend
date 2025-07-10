@@ -6,6 +6,7 @@ import Footer from '../Footer';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import axios from 'axios';
 import '../../Css/EditRequest.css'
+import Swal from 'sweetalert2';
 
 function EditRequest() {
     const { id } = useParams();
@@ -73,11 +74,15 @@ function EditRequest() {
         
         
       });
-      alert("Successfully updated!");
+      await Swal.fire(
+              'Updated!',
+              'The contract has been updated successfully.',
+              'success'
+              );
       navigate('/CustomerRequest'); // navigate back if needed
 
     } catch (error) {
-      console.error("Update failed:", error);
+      Swal.fire('Error!', 'Failed to update the contact.', 'error');
       alert("Failed to update contract.");
     }
   };
