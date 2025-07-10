@@ -60,13 +60,33 @@ export default function Admin() {
   };
 
   const addService = async () => {
+
+    const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to add this skill?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Add it!'
+              });
+        
+              if (!result.isConfirmed) return;
+
     if (!newService.trim()) return;
     try {
       await axios.post('http://localhost:8088/ServiceManagement-EAD/categories', { name: newService });
       
+      await Swal.fire(
+                          'Added!',
+                          'The skill has been added successfully.',
+                          'success'
+                        );
+
       fetchServices();
     } catch (error) {
       console.error('Error adding service:', error);
+      Swal.fire('Error!', 'Failed to add the skill.', 'error');
     }
   };
 
