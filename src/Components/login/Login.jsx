@@ -64,44 +64,18 @@ export default function Login() {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
 
-        <select
-          name="userType"
-          value={formData.userType}
-          onChange={handleChange}
-          className='login-input'
-          required
-        >
+        <select name="userType" value={formData.userType} onChange={handleChange} className='login-input' required>
           <option value="customer">Customer</option>
           <option value="worker">Worker</option>
           <option value="Admin">Admin</option>
         </select><br />
 
-        <input
-          className='login-input'
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        /><br />
+        <input className='login-input' type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} required/><br />
+        <input className='login-input' type="password"name="password" placeholder="Password" value={formData.password} onChange={handleChange} required/><br />
 
-        <input
-          className='login-input'
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        /><br />
-
-        
         <button className='login-button' type="submit">Login</button> 
 
-        <p className="create-account-text">
-        Don’t have an account? <Link to="/signup">Create one</Link>
-      </p>
+        <p className="create-account-text"> Don’t have an account? <Link to="/signup">Create one</Link> </p>
 
       </form>
       

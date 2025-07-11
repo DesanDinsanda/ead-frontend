@@ -83,6 +83,7 @@ export default function Admin() {
                           'success'
                         );
 
+      setNewService('');
       fetchServices();
     } catch (error) {
       console.error('Error adding service:', error);

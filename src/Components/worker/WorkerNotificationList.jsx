@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 function WorkerNotificationList() {
   const [notifications, setNotifications] = useState([]);
-  const workerId = sessionStorage.getItem('userId'); // make sure userId is worker's ID
+  const workerId = sessionStorage.getItem('userId');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function WorkerNotificationList() {
     }
   };
 
-  // Mark a notification as read
+  
   const handleMarkAsRead = async (notificationId) => {
     try {
       await axios.patch(`http://localhost:8090/notification-service/worker-notif/${notificationId}/mark-read`);

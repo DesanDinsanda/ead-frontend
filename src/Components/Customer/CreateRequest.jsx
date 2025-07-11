@@ -47,7 +47,7 @@ function CreateRequest() {
   };
 
   const handleSave = async (e) => {
-    e.preventDefault(); // Prevent form default behavior
+    e.preventDefault();
 
     try {
 
@@ -74,66 +74,30 @@ function CreateRequest() {
         <form className="form-card" onSubmit={handleSave}>
           <div className="form-group">
             <label>Service Title</label>
-            <input
-              type="text"
-              name="title"
-              required
-              value={formData.title}
-              onChange={handleChange}
-            />
+            <input type="text" name="title" required value={formData.title} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>Description</label>
-            <textarea
-              rows="3"
-              name="description"
-              required
-              value={formData.description}
-              onChange={handleChange}
-            ></textarea>
+            <textarea rows="3" name="description" required value={formData.description} onChange={handleChange}></textarea>
           </div>
 
           <div className="form-group">
             <label><MapPin size={16} className="icon" /> Address Line 1</label>
-            <input
-              type="text"
-              name="addr_line_1"
-              required
-              value={formData.addr_line_1}
-              onChange={handleChange}
-            />
+            <input type="text" name="addr_line_1" required value={formData.addr_line_1} onChange={handleChange} />
           </div>
           <div className="form-group">
             <label><MapPin size={16} className="icon" /> Address Line 2</label>
-            <input
-              type="text"
-              name="addr_line_2"
-              required
-              value={formData.addr_line_2}
-              onChange={handleChange}
-            />
+            <input type="text" name="addr_line_2" required value={formData.addr_line_2} onChange={handleChange} />
           </div>
           <div className="form-group">
             <label><MapPin size={16} className="icon" /> Address Line 3</label>
-            <input
-              type="text"
-              name="addr_line_3"
-              required
-              value={formData.addr_line_3}
-              onChange={handleChange}
-            />
+            <input type="text" name="addr_line_3" required value={formData.addr_line_3} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>Category</label>
-            <select
-              name="service_id"
-              required
-              value={formData.service_id}
-              onChange={handleChange}
-              style={{ padding: 13 }}
-            >
+            <select name="service_id" required value={formData.service_id} onChange={handleChange} style={{ padding: 13 }}>
               <option value="">Select Category</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>

@@ -65,12 +65,7 @@ export default function EditSkills() {
         <form onSubmit={handleUpdate} className="edit-skill-form">
 
           <label>Service</label>
-          <select
-            name="service_id"
-            value={formData.service_id}
-            onChange={handleChange}
-            required
-          >
+          <select name="service_id" value={formData.service_id} onChange={handleChange} required >
             <option value="">-- Select Service --</option>
             {services.map(service => (
               <option key={service.id} value={service.id}>{service.name}</option>
@@ -78,14 +73,7 @@ export default function EditSkills() {
           </select>
 
           <label>Work Experience (in years)</label>
-          <input
-            type="number"
-            name="work_experience"
-            value={formData.work_experience}
-            onChange={handleChange}
-            required
-            min={0}
-          />
+          <input type="number" name="work_experience" value={formData.work_experience} onChange={handleChange} required min={0}/>
 
           <button type="submit">Update Skill</button>
         </form>

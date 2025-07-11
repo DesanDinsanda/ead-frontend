@@ -152,17 +152,11 @@ export default function Signup() {
                       <option key={cat.id} value={cat.id}>{cat.name}</option>
                     ))}
                   </select>
-                  <input
-                    type="text"
-                    placeholder="Experience"
-                    value={skill.work_experience}
-                    onChange={(e) => {
+                  <input type="text" placeholder="Experience" value={skill.work_experience} onChange={(e) => {
                       const updatedSkills = [...skills];
                       updatedSkills[index].work_experience = e.target.value;
                       setSkills(updatedSkills);
-                    }}
-                    
-                  /><br />
+                    }} /> <br />
                 </div>
               ))}
             </>

@@ -31,14 +31,12 @@ function CustomerNotificationList() {
     try {
       await axios.patch(`http://localhost:8090/notification-service/customer-notif/${notif.id}/mark-read`);
 
-      // Redirect based on title
       if (notif.title === 'Your contract has been accepted') {
         navigate('/AcceptedCustomerRequests');
       } else if (notif.title === 'Your contract was cancelled') {
         navigate('/CancelledCustomerRequests');
       } else {
-        // fallback or other titles
-        fetchNotifications(); // just refresh
+        fetchNotifications();
       }
 
     } catch (error) {
@@ -66,13 +64,7 @@ function CustomerNotificationList() {
     .map((notif) => (
       <li
         key={notif.id}
-        style={{
-          backgroundColor: notif.status === 'Unread' ? '#f2f2f2' : '#d4edda',
-          padding: '15px',
-          marginBottom: '10px',
-          borderRadius: '5px',
-          border: '1px solid #ccc'
-        }}
+        style={{ backgroundColor: notif.status === 'Unread' ? '#f2f2f2' : '#d4edda', padding: '15px', marginBottom: '10px', borderRadius: '5px', border: '1px solid #ccc'}}
       >
         <strong>{notif.title}</strong>
         <p>{notif.description}</p>
@@ -80,17 +72,7 @@ function CustomerNotificationList() {
         <p style={{ color: "grey", marginBottom: "1.2px" }}><Clock3 size={16} /> Time : {notif.time}</p>
         <p style={{ color: "grey", marginBottom: "1.2px" }}><BookCheck size={16} /> Status: {notif.status}</p>
         {notif.status === 'Unread' && (
-          <button
-            onClick={() => handleNotificationClick(notif)}
-            style={{
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              padding: '8px 16px',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
-          >
+          <button onClick={() => handleNotificationClick(notif)} style={{ backgroundColor: '#007bff', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '5px', cursor: 'pointer' }} >
             Mark as Read & View
           </button>
         )}

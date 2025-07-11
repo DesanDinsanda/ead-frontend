@@ -110,47 +110,15 @@ export default function UpdateAccount() {
     <Header/>
     <div className="update-container">
       <h2>Update Account</h2>
-      <input
-        name="fname"
-        value={formData.fname}
-        onChange={handleChange}
-        placeholder="First Name"
-      />
-      <input
-        name="lname"
-        value={formData.lname}
-        onChange={handleChange}
-        placeholder="Last Name"
-      />
-      <input
-        name="contact"
-        value={formData.contact}
-        onChange={handleChange}
-        placeholder="Contact"
-      />
+      <input name="fname" value={formData.fname} onChange={handleChange} placeholder="First Name" />
+      <input name="lname" value={formData.lname} onChange={handleChange} placeholder="Last Name" />
+      <input name="contact" value={formData.contact} onChange={handleChange} placeholder="Contact" />
+
       {userType === 'worker' && (
-        <input
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          placeholder="Location"
-        />
+        <input name="location" value={formData.location} onChange={handleChange} placeholder="Location" />
       )}
-      <input
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        placeholder="Username"
-      />
-      <input
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="New Password (optional)"
-      />
-
-      
-
+      <input name="username" value={formData.username} onChange={handleChange} placeholder="Username" />
+      <input name="password" value={formData.password} onChange={handleChange} placeholder="New Password (optional)"/>
       <button onClick={handleUpdate}>Update</button>
       <p>{message}</p>
     </div>

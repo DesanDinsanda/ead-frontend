@@ -102,55 +102,27 @@ function EditRequest() {
       <div className="form-card">
         <div className="form-group">
           <label>Service Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-          />
+          <input type="text" name="title" value={formData.title} onChange={handleChange} />
         </div>
 
         <div className="form-group">
           <label>Description</label>
-          <textarea
-            rows="3"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          ></textarea>
+          <textarea rows="3" name="description" value={formData.description} onChange={handleChange}></textarea>
         </div>
 
         <div className="form-group">
           <label><MapPin size={16} className="icon" /> Adress Line 1</label>
-          <input
-            type="text"
-            name="addr_line_1"
-            value={formData.addr_line_1}
-            onChange={handleChange}
-          />
+          <input type="text" name="addr_line_1" value={formData.addr_line_1} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label><MapPin size={16} className="icon" /> Adress Line 2</label>
-          <input
-            type="text"
-            name="addr_line_2"
-            value={formData.addr_line_2}
-            onChange={handleChange}
-          />
+          <input type="text" name="addr_line_2" value={formData.addr_line_2} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label><MapPin size={16} className="icon" /> Adress Line 3</label>
-          <input
-            type="text"
-            name="addr_line_3"
-            value={formData.addr_line_3}
-
-            onChange={handleChange}
-          />
+          <input type="text" name="addr_line_3" value={formData.addr_line_3} onChange={handleChange} />
         </div>
-
-
-
+        
         <div className="btn-group">
           <button className="btn cancel" onClick={() => navigate(-1)}>Cancel</button>
           <button className="btn save" onClick={handleSave}>Save Changes</button>
