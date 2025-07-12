@@ -32,7 +32,7 @@ function NewComplain() {
       navigate("/Complain");
     } catch (error) {
       console.error("Error creating complain", error);
-      Swal.fire('Error!', 'Failed to Create the account.', 'error');
+      Swal.fire('Error!', 'Failed to Create the complain.', 'error');
     }
   };
   return (

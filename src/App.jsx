@@ -22,7 +22,7 @@ import EditSkills from './Components/worker/EditSkills'
 import NewComplain from './Components/Customer/NewComplain'
 import CreateRequest from './Components/Customer/CreateRequest'
 import AvailableJobs from './Components/worker/AvailableJobs'
-import EditComplain from './Components/customer/EditComplain'
+import EditComplain from './Components/Customer/EditComplain'
 
 import MyJobs from './Components/worker/MyJobs'
 import ViewAcceptedContracts from './Components/worker/ViewAcceptedContracts'
