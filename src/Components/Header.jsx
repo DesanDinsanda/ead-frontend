@@ -94,7 +94,7 @@ function Header() {
                   </NavDropdown>
 
                   {/* test dropdown*/}
-                  <Nav.Link href="#link" className='text-white' onClick={() => navigate('/Complain')}>Complain</Nav.Link>
+                  <Nav.Link className='text-white' onClick={() => navigate('/Complain')}>Complain</Nav.Link>
                   <div style={{ position: 'relative', display: 'inline-block', marginLeft: 20, cursor: 'pointer' }} onClick={() => navigate('/customerNotifications')}>
                     {hasUnread && (
                       <Dot size={50} color="#ff0000" style={{ paddingRight: 1, marginTop: -10, position: 'absolute', top: -10, left: 10 }} />

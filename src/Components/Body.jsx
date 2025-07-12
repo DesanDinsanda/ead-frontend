@@ -58,14 +58,16 @@ function Body() {
     <>
     <Header/>
     <div class="title">
-    <div class="content">
-      <h1>ServiceConnect</h1>
-      <p>The easiest way to find reliable service professionals for all your home maintenance and improvement needs.</p>
-      <div class="buttons">
-        <a  class="btn primary" onClick={() => navigate('/signup')}>Get Started</a>
-      </div>
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>ServiceConnect</h1>
+    <p>The easiest way to find reliable service professionals for all your home maintenance and improvement needs.</p>
+    <div class="buttons">
+      <a class="btn primary" onClick={() => navigate('/signup')}>Get Started</a>
     </div>
   </div>
+</div>
+
 
   <div className='info'>    
     <div className='infoDetails'>
